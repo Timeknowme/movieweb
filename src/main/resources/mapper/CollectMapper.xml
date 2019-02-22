@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xu.movieweb.dao.CollectMapper">
+    <resultMap id="CollectMap" type="com.xu.movieweb.model.Collect">
+        <result column="col_id" property="collectId" jdbcType="INTEGER"/>
+        <association property="user" select="com.xu.movieweb.dao.UserMapper.selectByUserId" column="col_user_id" javaType="User">
+        </association>
+        <association property="movie" select="com.xu.movieweb.dao.MovieMapper.selectByMovieId" column="col_movie_id" javaType="Movie">
+        </association>
+    </resultMap>
+    <select id="selectColByUserId" resultMap="CollectMap">
+        SELECT *
+        FROM
+        collect c,
+        `user` u
+        WHERE
+        c.col_user_id = u.user_id
+        AND
+        u.user_id = #{userId}
+    </select>
+    <select id="selectColByMovieId" resultMap="CollectMap">
+        SELECT *
+        FROM
+        collect c,
+        movie m
+        WHERE
+        c.col_movie_id = m.movie_id
+        AND
+        m.movie_id = #{movieId}
+    </select>
+    <insert id="addCollect">
+        INSERT INTO collect(
+            col_user_id,
+            col_movie_id
+        ) VALUES (
+            #{userId},
+            #{movieId}
+        )
+    </insert>
+    <delete id="deleteCollect">
+        DELETE FROM collect
+        WHERE
+        col_user_id = #{userId}
+        AND
+        col_movie_id = #{movieId}
+    </delete>
+</mapper>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xu.movieweb.dao.MovieMapper">
+    <resultMap id="MovieMap" type="com.xu.movieweb.model.Movie">
+        <result column="movie_id" property="movieId" jdbcType="INTEGER"/>
+        <result column="movie_name" property="movieName" jdbcType="VARCHAR"/>
+        <result column="movie_director" property="movieDirector" jdbcType="VARCHAR"/>
+        <result column="movie_writer" property="movieWriter" jdbcType="VARCHAR"/>
+        <result column="movie_actor" property="movieActor" jdbcType="VARCHAR"/>
+        <result column="movie_type" property="movieType" jdbcType="VARCHAR"/>
+        <result column="movie_location" property="movieLocation" jdbcType="VARCHAR"/>
+        <result column="movie_language" property="movieLanguage" jdbcType="VARCHAR"/>
+        <result column="movie_date" property="movieDate" jdbcType="VARCHAR"/>
+        <result column="movie_time" property="movieTime" jdbcType="VARCHAR"/>
+        <result column="movie_brief" property="movieBrief" jdbcType="VARCHAR"/>
+        <result column="movie_headpic" property="movieHeadpic" jdbcType="VARCHAR"/>
+        <collection property="collects" ofType="Collect" select="com.xu.movieweb.dao.CollectMapper.selectColByMovieId" column="movie_id">
+        </collection>
+        <collection property="comments" ofType="Comment" select="com.xu.movieweb.dao.CommentMapper.selectComByMovieId" column="movie_id">
+        </collection>
+        <collection property="scores" ofType="Score" select="com.xu.movieweb.dao.ScoreMapper.selectScoByMovieId" column="movie_id">
+        </collection>
+        <collection property="moviepics" ofType="Moviepic" select="com.xu.movieweb.dao.MoviepicMapper.selectPicsByMovieId" column="movie_id">
+        </collection>
+    </resultMap>
+    <select id="selectByMovieId" resultMap="MovieMap" parameterType="java.lang.Integer">
+        SELECT *
+        FROM
+        movie
+        WHERE
+        movie_id = #{movieId,jdbcType=INTEGER}
+    </select>
+    <insert id="addMovie">
+        INSERT INTO movie(
+            movie_name,
+            movie_director,
+            movie_writer,
+            movie_actor,
+            movie_type,
+            movie_location,
+            movie_language,
+            movie_date,
+            movie_time,
+            movie_brief
+        ) VALUES (
+            #{movie.movieName},
+            #{movie.movieDirector},
+            #{movie.movieWriter},
+            #{movie.movieActor},
+            #{movie.movieType},
+            #{movie.movieLocation},
+            #{movie.movieLanguage},
+            #{movie.movieDate},
+            #{movie.movieTime},
+            #{movie.movieBrief}
+        )
+    </insert>
+    <update id="updateMovie">
+        UPDATE movie
+        SET movie_name = #{movie.movieName},
+        movie_director = #{movie.movieDirector},
+        movie_writer = #{movie.movieWriter},
+        movie_actor = #{movie.movieActor},
+        movie_type = #{movie.movieType},
+        movie_location = #{movie.movieLocation},
+        movie_language = #{movie.movieLanguage},
+        movie_date = #{movie.movieDate},
+        movie_time = #{movie.movieTime},
+        movie_brief = #{movie.movieBrief}
+        WHERE
+        movie_id = #{movieId}
+    </update>
+    <delete id="deleteMovie">
+        DELETE FROM movie
+        WHERE
+        movie_id = #{movieId}
+    </delete>
+    <select id="listMovieByName" resultMap="MovieMap" parameterType="java.lang.String">
+        SELECT *
+        FROM
+        movie
+        WHERE
+        movie_name LIKE "%"#{movieName}"%"
+    </select>
+</mapper>

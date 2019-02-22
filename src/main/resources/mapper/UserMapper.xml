@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xu.movieweb.dao.UserMapper">
+    <resultMap id="UserMap" type="com.xu.movieweb.model.User">
+        <result column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="user_psd" property="userPsd" jdbcType="VARCHAR"/>
+        <result column="user_realname" property="userRealname" jdbcType="VARCHAR"/>
+        <result column="user_sex" property="userSex" jdbcType="VARCHAR"/>
+        <result column="user_birth" property="userBirth" jdbcType="VARCHAR"/>
+        <result column="user_city" property="userCity" jdbcType="VARCHAR"/>
+        <result column="user_email" property="userEmail" jdbcType="VARCHAR"/>
+        <result column="user_qq" property="userQQ" jdbcType="VARCHAR"/>
+        <result column="user_telphone" property="userTelphone" jdbcType="VARCHAR"/>
+        <result column="user_headpic" property="userHeadpic" jdbcType="VARCHAR"/>
+        <collection property="collects" ofType="Collect" select="com.xu.movieweb.dao.CollectMapper.selectColByUserId" column="user_id">
+        </collection>
+        <collection property="comments" ofType="Comment" select="com.xu.movieweb.dao.CommentMapper.selectComByUserId" column="user_id">
+        </collection>
+        <collection property="scores" ofType="Score" select="com.xu.movieweb.dao.ScoreMapper.selectScoByUserId" column="user_id">
+        </collection>
+    </resultMap>
+    <select id="selectByUserId" parameterType="java.lang.Integer" resultMap="UserMap">
+        SELECT *
+        FROM
+        `user`
+        WHERE
+        user_id = #{userId,jdbcType=INTEGER}
+    </select>
+    <insert id="addUser">
+        INSERT INTO `user`(
+            user_name,
+            user_psd )
+        VALUES (
+            #{user.userName,jdbcType=VARCHAR},
+            #{user.userPsd,jdbcType=VARCHAR}
+        )
+    </insert>
+    <select id="selectUserByName" resultMap="UserMap" parameterType="java.lang.String">
+        SELECT *
+        FROM
+        `user`
+        WHERE
+        user_name = #{user.userName,jdbcType=VARCHAR}
+    </select>
+    <select id="userLogin" resultMap="UserMap" parameterType="java.lang.String">
+        SELECT *
+        FROM
+        `user`
+        WHERE
+        user_name = #{userName,jdbcType=VARCHAR}
+        AND
+        user_psd = #{userPsd,jdbcType=VARCHAR}
+    </select>
+    <update id="updateUser">
+        UPDATE `user`
+        SET user_realname = #{user.userRealname},
+        user_sex = #{user.userSex},
+        user_birth = #{user.userBirth},
+        user_city = #{user.userCity},
+        user_email = #{user.userEmail},
+        user_qq = #{user.userQQ},
+        user_telphone = #{user.userTelphone}
+        WHERE
+        user_id = #{userId}
+    </update>
+</mapper>

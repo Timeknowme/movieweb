@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xu.movieweb.dao.MoviepicMapper">
+    <select id="selectPicsByMovieId" parameterType="java.lang.Integer" resultMap="MoviepicMap">
+        SELECT *
+        FROM
+        movie m,
+        moviepic mp
+        WHERE
+        mp.mpic_movie_id = m.movie_id
+        AND
+        m.movie_id = #{movieId,jdbcType=INTEGER}
+    </select>
+    <resultMap id="MoviepicMap" type="com.xu.movieweb.model.Moviepic">
+        <result column="mpic_id" property="mpicId" jdbcType="INTEGER"/>
+        <result column="mpic_address" property="mpicAddress" jdbcType="VARCHAR"/>
+        <association property="movie" select="com.xu.movieweb.dao.MovieMapper.selectByMovieId" column="mpic_movie_id" javaType="Movie">
+        </association>
+    </resultMap>
+</mapper>

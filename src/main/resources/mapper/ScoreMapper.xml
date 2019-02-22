@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xu.movieweb.dao.ScoreMapper">
+    <resultMap id="ScoreMap" type="com.xu.movieweb.model.Score">
+        <result column="score_id" property="scoreId" jdbcType="INTEGER"/>
+        <result column="score_num" property="scoreNum" jdbcType="INTEGER"/>
+        <association property="user" select="com.xu.movieweb.dao.UserMapper.selectByUserId" column="score_user_id" javaType="User">
+        </association>
+        <association property="movie" select="com.xu.movieweb.dao.MovieMapper.selectByMovieId" column="score_movie_id" javaType="Movie">
+        </association>
+    </resultMap>
+    <select id="selectScoByUserId" resultMap="ScoreMap" parameterType="java.lang.Integer">
+        SELECT *
+        FROM
+        score s,
+        `user` u
+        WHERE
+        s.score_user_id = u.user_id
+        AND
+        u.user_id = #{userId}
+    </select>
+    <select id="selectScoByMovieId" resultMap="ScoreMap" parameterType="java.lang.Integer">
+        SELECT *
+        FROM
+        score s,
+        movie m
+        WHERE
+        s.score_movie_id = m.movie_id
+        AND
+        m.movie_id = #{movieId}
+    </select>
+    <insert id="addScore">
+        INSERT INTO score(
+            score_user_id,
+            score_movie_id,
+            score_num
+        ) VALUES (
+            #{userId},
+            #{movieId},
+            #{scoreNum}
+        )
+    </insert>
+</mapper>

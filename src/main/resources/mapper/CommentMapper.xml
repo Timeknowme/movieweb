@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xu.movieweb.dao.CommentMapper">
+    <resultMap id="CommentMap" type="com.xu.movieweb.model.Comment">
+        <result column="comment_id" property="commentId" jdbcType="INTEGER"/>
+        <result column="comment_text" property="commentText" jdbcType="VARCHAR"/>
+        <association property="user" select="com.xu.movieweb.dao.UserMapper.selectByUserId" column="comment_user_id" javaType="User">
+        </association>
+        <association property="movie" select="com.xu.movieweb.dao.MovieMapper.selectByMovieId" column="comment_movie_id" javaType="Movie">
+        </association>
+    </resultMap>
+    <select id="selectComByUserId" resultMap="CommentMap" parameterType="java.lang.Integer">
+        SELECT *
+        FROM
+        comment c,
+        `user` u
+        WHERE
+        c.comment_user_id = u.user_id
+        AND
+        u.user_id = #{userId}
+    </select>
+    <select id="selectComByMovieId" resultMap="CommentMap" parameterType="java.lang.Integer">
+        SELECT *
+        FROM
+        comment c,
+        movie m
+        WHERE
+        c.comment_movie_id = m.movie_id
+        AND
+        m.movie_id = #{movieId}
+    </select>
+    <insert id="addComment">
+        INSERT INTO comment(
+            comment_user_id,
+            comment_movie_id,
+            comment_text
+        ) VALUES (
+            #{userId},
+            #{movieId},
+            #{text}
+        )
+    </insert>
+    <delete id="deleteComment">
+        DELETE FROM comment
+        WHERE
+        comment_id = #{commentId}
+    </delete>
+</mapper>
