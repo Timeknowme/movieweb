@@ -9,4 +9,8 @@ public abstract interface ScoreService {
     void addScore(Integer userId, Integer movieId, Integer scoreNum);
 
     List<Score> selectScoByMovieId(Integer movieId);
+
+    Integer listScoByMovieIdCount(Integer movieId);
+
+    Integer isScore(Integer userId, Integer movieId);
 }

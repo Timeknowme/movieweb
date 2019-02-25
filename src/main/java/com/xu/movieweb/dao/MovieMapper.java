@@ -16,4 +16,6 @@ public interface MovieMapper {
     void deleteMovie(@Param("movieId") Integer movieId);
 
     List<Movie> listMovieByName(@Param("movieName") String movieName);
+
+    List<Movie> listMovieByTop8();
 }

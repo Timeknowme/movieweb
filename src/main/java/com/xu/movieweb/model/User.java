@@ -17,6 +17,7 @@ public class User {
     private List<Collect> collects;
     private List<Comment> comments;
     private List<Score> scores;
+
     public List<Collect> getCollects() {
         return collects;
     }

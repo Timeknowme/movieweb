@@ -3,6 +3,7 @@
 <mapper namespace="com.xu.movieweb.dao.CollectMapper">
     <resultMap id="CollectMap" type="com.xu.movieweb.model.Collect">
         <result column="col_id" property="collectId" jdbcType="INTEGER"/>
+        <result column="col_updatetime" property="collectUpdateTime" jdbcType="TIMESTAMP"/>
         <association property="user" select="com.xu.movieweb.dao.UserMapper.selectByUserId" column="col_user_id" javaType="User">
         </association>
         <association property="movie" select="com.xu.movieweb.dao.MovieMapper.selectByMovieId" column="col_movie_id" javaType="Movie">
@@ -44,4 +45,14 @@
         AND
         col_movie_id = #{movieId}
     </delete>
+    <select id="isCollected" resultType="java.lang.Integer">
+        SELECT
+        COUNT(1)
+        FROM
+        collect c
+        WHERE
+        c.collect_user_id = #{userId}
+        AND
+        c.collect_movie_id = #{movieId}
+    </select>
 </mapper>

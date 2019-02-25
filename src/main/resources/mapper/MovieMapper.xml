@@ -14,6 +14,7 @@
         <result column="movie_time" property="movieTime" jdbcType="VARCHAR"/>
         <result column="movie_brief" property="movieBrief" jdbcType="VARCHAR"/>
         <result column="movie_headpic" property="movieHeadpic" jdbcType="VARCHAR"/>
+        <result column="movie_updatetime" property="movieUpdatetime" jdbcType="TIMESTAMP"/>
         <collection property="collects" ofType="Collect" select="com.xu.movieweb.dao.CollectMapper.selectColByMovieId" column="movie_id">
         </collection>
         <collection property="comments" ofType="Comment" select="com.xu.movieweb.dao.CommentMapper.selectComByMovieId" column="movie_id">
@@ -76,10 +77,19 @@
         movie_id = #{movieId}
     </delete>
     <select id="listMovieByName" resultMap="MovieMap" parameterType="java.lang.String">
-        SELECT *
+        SELECT movie_name
         FROM
         movie
         WHERE
         movie_name LIKE "%"#{movieName}"%"
+    </select>
+    <select id="listMovieByTop8" resultMap="MovieMap">
+        SELECT movie_name
+        FROM
+        movie
+        ORDER BY
+        movie_updatetime DESC
+        limit
+        0,8
     </select>
 </mapper>

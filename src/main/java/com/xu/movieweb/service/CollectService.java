@@ -12,4 +12,6 @@ public abstract interface CollectService {
     void addCollect(Integer userId,Integer movieId);
 
     void deleteCollect(Integer userId,Integer movieId);
+
+    Integer isCollected(Integer userId,Integer movieId);
 }

@@ -23,4 +23,14 @@ public class ScoreServiceImpl implements ScoreService {
     public List<Score> selectScoByMovieId(Integer movieId) {
         return scoreMapper.selectScoByMovieId(movieId);
     }
+
+    @Override
+    public Integer listScoByMovieIdCount(Integer movieId) {
+        return scoreMapper.listScoByMovieIdCount(movieId);
+    }
+
+    @Override
+    public Integer isScore(Integer userId, Integer movieId) {
+        return scoreMapper.isScored(userId, movieId);
+    }
 }

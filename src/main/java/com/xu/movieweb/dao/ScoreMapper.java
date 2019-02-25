@@ -12,4 +12,8 @@ public interface ScoreMapper {
     List<Score> selectScoByMovieId(@Param("movieId") Integer movieId);
 
     void addScore(@Param("userId") Integer userId, @Param("movieId") Integer movieId, @Param("scoreNum") Integer scoreNum);
+
+    Integer listScoByMovieIdCount(@Param("movieId") Integer movieId);
+
+    Integer isScored(@Param("userId") Integer userId, @Param("movieId") Integer movieId);
 }

@@ -4,6 +4,7 @@
     <resultMap id="CommentMap" type="com.xu.movieweb.model.Comment">
         <result column="comment_id" property="commentId" jdbcType="INTEGER"/>
         <result column="comment_text" property="commentText" jdbcType="VARCHAR"/>
+        <result column="comment_updatetime" property="commentUpdateTime" jdbcType="TIMESTAMP"/>
         <association property="user" select="com.xu.movieweb.dao.UserMapper.selectByUserId" column="comment_user_id" javaType="User">
         </association>
         <association property="movie" select="com.xu.movieweb.dao.MovieMapper.selectByMovieId" column="comment_movie_id" javaType="Movie">
@@ -20,7 +21,8 @@
         u.user_id = #{userId}
     </select>
     <select id="selectComByMovieId" resultMap="CommentMap" parameterType="java.lang.Integer">
-        SELECT *
+        SELECT
+        c.*
         FROM
         comment c,
         movie m

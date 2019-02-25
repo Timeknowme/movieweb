@@ -1,5 +1,6 @@
 package com.xu.movieweb.model;
 
+import java.util.Date;
 import java.util.List;
 
 public class Movie {
@@ -15,18 +16,11 @@ public class Movie {
     private String movieTime;
     private String movieBrief;
     private String movieHeadpic;
+    private Date movieUpdatetime;
     private List<Collect> collects;
     private List<Comment> comments;
     private List<Score> scores;
     private List<Moviepic> moviepics;
-
-    public List<Moviepic> getMoviepics() {
-        return moviepics;
-    }
-
-    public void setMoviepics(List<Moviepic> moviepics) {
-        this.moviepics = moviepics;
-    }
 
     public List<Collect> getCollects() {
         return collects;
@@ -50,6 +44,14 @@ public class Movie {
 
     public void setScores(List<Score> scores) {
         this.scores = scores;
+    }
+
+    public List<Moviepic> getMoviepics() {
+        return moviepics;
+    }
+
+    public void setMoviepics(List<Moviepic> moviepics) {
+        this.moviepics = moviepics;
     }
 
     public Integer getMovieId() {
@@ -146,5 +148,13 @@ public class Movie {
 
     public void setMovieHeadpic(String movieHeadpic) {
         this.movieHeadpic = movieHeadpic;
+    }
+
+    public Date getMovieUpdatetime() {
+        return movieUpdatetime;
+    }
+
+    public void setMovieUpdatetime(Date movieUpdatetime) {
+        this.movieUpdatetime = movieUpdatetime;
     }
 }

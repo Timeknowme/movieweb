@@ -1,17 +1,17 @@
 package com.xu.movieweb.model;
 
 public class Score {
-    private Integer scroeId;
+    private Integer scoreId;
     private Integer scoreNum;
     private User user;
     private Movie movie;
 
-    public Integer getScroeId() {
-        return scroeId;
+    public Integer getScoreId() {
+        return scoreId;
     }
 
-    public void setScroeId(Integer scroeId) {
-        this.scroeId = scroeId;
+    public void setScoreId(Integer scoreId) {
+        this.scoreId = scoreId;
     }
 
     public Integer getScoreNum() {

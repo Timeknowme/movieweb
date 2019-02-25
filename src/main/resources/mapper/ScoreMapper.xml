@@ -40,4 +40,25 @@
             #{scoreNum}
         )
     </insert>
+    <select id="listScoByMovieIdCount" resultType="java.lang.Integer">
+        SELECT
+        COUNT(1)
+        FROM
+        score s,
+        movie m
+        WHERE
+        s.score_movie_id = m.movie_id
+        AND
+        m.movie_id = #{movieId}
+    </select>
+    <select id="isScored" resultType="java.lang.Integer">
+        SELECT
+        COUNT(1)
+        FROM
+        score s
+        WHERE
+        s.score_user_id = #{userId}
+        AND
+        s.score_movie_id = #{movieId}
+    </select>
 </mapper>

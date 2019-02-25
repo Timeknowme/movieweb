@@ -38,4 +38,9 @@ public class MovieServiceImpl implements MovieService {
     public List<Movie> listMovieByName(String movieName) {
         return movieMapper.listMovieByName(movieName);
     }
+
+    @Override
+    public List<Movie> listMovieByTop8() {
+        return movieMapper.listMovieByTop8();
+    }
 }

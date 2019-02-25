@@ -29,4 +29,9 @@ public class CollectServiceImpl implements CollectService {
     public void deleteCollect(Integer userId, Integer movieId) {
         collectMapper.deleteCollect(userId, movieId);
     }
+
+    @Override
+    public Integer isCollected(Integer userId, Integer movieId) {
+        return collectMapper.isCollected(userId, movieId);
+    }
 }

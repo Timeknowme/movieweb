@@ -15,4 +15,6 @@ public abstract interface MovieService {
     void deleteMovie(Integer movieId);
 
     List<Movie> listMovieByName(String movieName);
+
+    List<Movie> listMovieByTop8();
 }
