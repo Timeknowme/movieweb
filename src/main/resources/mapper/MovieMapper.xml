@@ -92,4 +92,11 @@
         limit
         0,8
     </select>
+    <select id="listMovieByType" resultMap="MovieMap">
+        SELECT *
+        FROM
+        movie
+        WHERE
+        movie_type LIKE "%"#{movieType}"%"
+    </select>
 </mapper>

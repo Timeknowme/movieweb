@@ -40,4 +40,19 @@ public class UserServiceImpl implements UserService {
     public User selectByUserId(Integer userId) {
         return userMapper.selectByUserId(userId);
     }
+
+    @Override
+    public String getPsdByUserId(Integer userId) {
+        return userMapper.getPsdByUserId(userId);
+    }
+
+    @Override
+    public void updatePsdByUserId(Integer userId, String newPsd) {
+        userMapper.updatePsdByUserId(userId, newPsd);
+    }
+
+    @Override
+    public void uploadHeadPic(Integer userId, String picAddress) {
+        userMapper.uploadHeadPic(userId, picAddress);
+    }
 }

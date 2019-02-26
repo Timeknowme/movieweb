@@ -18,4 +18,10 @@ public abstract interface UserMapper{
 
     void updateUser(@Param("user") User user,@Param("userId") Integer userId);
 
+    String getPsdByUserId(@Param("userId") Integer userId);
+
+    void updatePsdByUserId(@Param("userId") Integer userId,@Param("newPsd") String newPsd);
+
+    void uploadHeadPic(@Param("userId") Integer userId, @Param("picAddress") String picAddress);
+
 }

@@ -14,4 +14,8 @@ public interface CommentMapper {
     void addComment(@Param("userId") Integer userId,@Param("movieId") Integer movieId,@Param("text") String text);
 
     void deleteComment(@Param("commentId") Integer commentId);
+
+    Integer listComByMovieIdCount(@Param("movieId") Integer movieId);
+
+    Integer listComByUserIdCount(@Param("userId") Integer userId);
 }

@@ -70,11 +70,19 @@ public class MovieController {
         return mav;
     }
 
-    @RequestMapping(value = {"/searchMovie"}, method = {RequestMethod.POST})
-    public ModelAndView searchmovie(String movieName){
+    @RequestMapping(value = {"/searchMovieByName"}, method = {RequestMethod.POST})
+    public ModelAndView searchmoviebyname(String movieName){
         ModelAndView mav = new ModelAndView("addmovie");
         List<Movie> movies = movieService.listMovieByName(movieName);
         mav.addObject("movies",movies);
+        return mav;
+    }
+
+    @RequestMapping(value = {"/searchMovieByType"}, method = {RequestMethod.POST})
+    public ModelAndView searchmoviebytype(String movieType){
+        ModelAndView mav = new ModelAndView();
+        List<Movie> movieList = movieService.listMovieByType(movieType);
+        mav.addObject("movielist",movieList);
         return mav;
     }
 

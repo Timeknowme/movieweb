@@ -28,4 +28,19 @@ public class CommentServiceImpl implements CommentService {
     public void deleteComment(Integer commentId) {
         commentMapper.deleteComment(commentId);
     }
+
+    @Override
+    public List<Comment> selectComByUserId(Integer userId) {
+        return commentMapper.selectComByUserId(userId);
+    }
+
+    @Override
+    public Integer listComByMovieIdCount(Integer movieId) {
+        return commentMapper.listComByMovieIdCount(movieId);
+    }
+
+    @Override
+    public Integer listComByUserIdCount(Integer userId) {
+        return commentMapper.listComByUserIdCount(userId);
+    }
 }

@@ -18,4 +18,6 @@ public interface MovieMapper {
     List<Movie> listMovieByName(@Param("movieName") String movieName);
 
     List<Movie> listMovieByTop8();
+
+    List<Movie> listMovieByType(@Param("movieType") String movieType);
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xu.movieweb.dao.AdminMapper">
+    <resultMap id="NewsMapper" type="com.xu.movieweb.model.News">
+        <result column="news_id" property="newsId" jdbcType="INTEGER"/>
+        <result column="news_title" property="newsTitle" jdbcType="VARCHAR"/>
+        <result column="news_author" property="newsAuthor" jdbcType="VARCHAR"/>
+        <result column="news_content" property="newsContent" jdbcType="VARCHAR"/>
+        <result column="news_click" property="newsClick" jdbcType="INTEGER"/>
+        <result column="news_isrecommend" property="newsIsRecommend" jdbcType="INTEGER"/>
+        <result column="news_createtime" property="newsCreatetime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <select id="selectByNewsId" resultMap="NewsMapper">
+        SELECT *
+        FROM
+        news
+        WHERE
+        news_id = #{newsId}
+    </select>
+</mapper>

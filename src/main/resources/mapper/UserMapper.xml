@@ -64,4 +64,26 @@
         WHERE
         user_id = #{userId}
     </update>
+    <select id="getPsdByUserId" resultType="java.lang.String">
+        SELECT
+        u.user_psd
+        FROM
+        `user` u
+        WHERE
+        u.user_id = #{userId}
+    </select>
+    <update id="updatePsdByUserId">
+        UPDATE `user`
+        SET
+        user_psd = #{newPsd}
+        WHERE
+        user_id = #{userId}
+    </update>
+    <update id="uploadHeadPic">
+        UPDATE `user`
+        SET
+        user_headpic = #{picAddress}
+        WHERE
+        user_id = #{userId}
+    </update>
 </mapper>

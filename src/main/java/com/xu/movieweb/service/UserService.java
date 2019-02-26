@@ -13,4 +13,10 @@ public abstract interface UserService {
     void updateUser(User user,Integer userId);
 
     User selectByUserId(Integer userId);
+
+    String getPsdByUserId(Integer userId);
+
+    void updatePsdByUserId(Integer userId,String newPsd);
+
+    void uploadHeadPic(Integer userId,String picAddress);
 }

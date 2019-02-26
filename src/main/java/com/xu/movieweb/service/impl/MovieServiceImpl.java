@@ -43,4 +43,9 @@ public class MovieServiceImpl implements MovieService {
     public List<Movie> listMovieByTop8() {
         return movieMapper.listMovieByTop8();
     }
+
+    @Override
+    public List<Movie> listMovieByType(String movieType) {
+        return movieMapper.listMovieByType(movieType);
+    }
 }

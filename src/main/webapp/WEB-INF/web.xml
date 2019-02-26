@@ -7,6 +7,26 @@
     <!-- 如果是监听多个文件，可用‘，’隔开 -->
     <param-value>classpath:spring-*.xml</param-value>
   </context-param>
+  <!-- Spring MVC 核心控制器 DispatcherServlet 配置开始 -->
+  <servlet>
+    <servlet-name>SpringMVC</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <!-- 可以通过contextConfigLocation来自定义SpringMVC配置文件的位置，如不指定，则默认在WEB-INF目录下，名称为[<servlet-name>]-servlet.xml，
+         此时文件名必须为[<servlet-name>]-servlet.xml，否则会出错-->
+    <!--以下init-param是自定义SpringMVC的配置文件的位置 -->
+    <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>classpath:spring-mvc.xml</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <!-- 拦截设置 -->
+  <servlet-mapping>
+    <servlet-name>SpringMVC</servlet-name>
+    <!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
+    <url-pattern>*.html</url-pattern>
+  </servlet-mapping>
+  <!-- Spring MVC 核心配置结束 -->
   <listener>
     <description>配置Spring上下文监听器</description>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -46,54 +66,41 @@
   <listener>
     <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
   </listener>
-  <!-- Spring MVC 核心控制器 DispatcherServlet 配置开始 -->
-  <servlet>
-    <servlet-name>SpringMVC</servlet-name>
-    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-    <!-- 可以通过contextConfigLocation来自定义SpringMVC配置文件的位置，如不指定，则默认在WEB-INF目录下，名称为[<servlet-name>]-servlet.xml，
-         此时文件名必须为[<servlet-name>]-servlet.xml，否则会出错-->
-    <!--以下init-param是自定义SpringMVC的配置文件的位置 -->
-    <init-param>
-      <param-name>contextConfigLocation</param-name>
-      <param-value>classpath:spring-mvc.xml</param-value>
-    </init-param>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <!-- 拦截设置 -->
-  <servlet-mapping>
-    <servlet-name>SpringMVC</servlet-name>
-    <!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
-    <url-pattern>*.html</url-pattern>
-  </servlet-mapping>
-  <!-- Spring MVC 核心配置结束 -->
-  <!-- 激活Tomcat的defaultServlet来处理静态文件 -->
-  <servlet-mapping>
-    <servlet-name>default</servlet-name>
-    <url-pattern>/static/*</url-pattern>
-  </servlet-mapping>
-  <!-- session 时间 -->
-  <session-config>
-    <session-timeout>30</session-timeout>
-  </session-config>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.css</url-pattern>
-    </servlet-mapping>
 
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.js</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.gif</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.png</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.jpg</url-pattern>
-    </servlet-mapping>
+  <!-- 激活Tomcat的defaultServlet来处理静态文件 -->
+  <!--<servlet-mapping>-->
+    <!--<servlet-name>default</servlet-name>-->
+    <!--<url-pattern>/static/*</url-pattern>-->
+  <!--</servlet-mapping>-->
+  <!--&lt;!&ndash; session 时间 &ndash;&gt;-->
+  <!--<session-config>-->
+    <!--<session-timeout>30</session-timeout>-->
+  <!--</session-config>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>default</servlet-name>-->
+        <!--<url-pattern>*.js</url-pattern>-->
+        <!--<url-pattern>*.css</url-pattern>-->
+        <!--<url-pattern>/images/*</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>default</servlet-name>-->
+        <!--<url-pattern>*.css</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>default</servlet-name>-->
+        <!--<url-pattern>*.js</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>default</servlet-name>-->
+        <!--<url-pattern>*.gif</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>default</servlet-name>-->
+        <!--<url-pattern>*.png</url-pattern>-->
+    <!--</servlet-mapping>-->
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>default</servlet-name>-->
+        <!--<url-pattern>*.jpg</url-pattern>-->
+    <!--</servlet-mapping>-->
 </web-app>

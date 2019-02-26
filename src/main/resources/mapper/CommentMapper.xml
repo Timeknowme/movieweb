@@ -47,4 +47,20 @@
         WHERE
         comment_id = #{commentId}
     </delete>
+    <select id="listComByMovieIdCount" resultType="java.lang.Integer">
+        SELECT
+        COUNT(1)
+        FROM
+        comment
+        WHERE
+        comment_movie_id = #{movieId}
+    </select>
+    <select id="listComByUserIdCount" resultType="java.lang.Integer">
+        SELECT
+        COUNT(1)
+        FROM
+        comment
+        WHERE
+        comment_user_id = #{userId}
+    </select>
 </mapper>

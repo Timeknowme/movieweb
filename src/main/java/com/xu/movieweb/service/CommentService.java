@@ -11,4 +11,10 @@ public abstract interface CommentService {
     List<Comment> selectComByMovieId(Integer movieId);
 
     void deleteComment(Integer commentId);
+
+    List<Comment> selectComByUserId(Integer userId);
+
+    Integer listComByMovieIdCount(Integer movieId);
+
+    Integer listComByUserIdCount(Integer userId);
 }
