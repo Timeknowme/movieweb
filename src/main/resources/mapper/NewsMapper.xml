@@ -8,6 +8,7 @@
         <result column="news_content" property="newsContent" jdbcType="VARCHAR"/>
         <result column="news_click" property="newsClick" jdbcType="INTEGER"/>
         <result column="news_isrecommend" property="newsIsRecommend" jdbcType="INTEGER"/>
+        <result column="news_status" property="newsStatus" jdbcType="INTEGER"/>
         <result column="news_createtime" property="newsCreatetime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <select id="selectByNewsId" resultMap="NewsMapper">
@@ -16,5 +17,73 @@
         news
         WHERE
         news_id = #{newsId}
+    </select>
+    <insert id="addNews">
+        INSERT INTO news(
+            news_title,
+            news_author,
+            news_conent,
+            news_isrecommend,
+            news_status,
+            news_createtime
+        ) VALUES (
+            #{news.newsTitle},
+            #{news.newsAuthor},
+            #{news.newsContent},
+            0,
+            1,
+            #{news.newsCreatetime}
+        )
+    </insert>
+    <update id="updateNews">
+        UPDATE news
+        SET
+        news_title = #{news.newsTitle},
+        news_author = #{news.newsAuthor},
+        news_content = #{news.newsContent}
+        WHERE
+        news_id = #{newsId}
+    </update>
+    <update id="deleteNews">
+        UPDATE news
+        SET
+        news_status = 0
+        WHERE
+        news_id = #{newsId}
+    </update>
+    <update id="addNewsClick">
+        UPDATE news
+        SET
+        news_click = news_click + 1
+        WHERE
+        news_id = #{newsId}
+    </update>
+    <update id="setNewsRecommend">
+        UPDATE news
+        SET
+        news_isrecommend = 1
+        WHERE
+        news_id = #{newsId}
+    </update>
+    <update id="setNewsUnRecommend">
+        UPDATE news
+        SET
+        news_isrecommend = 0
+        WHERE
+        news_id = #{newsId}
+    </update>
+    <select id="listNewsByTitle" resultMap="NewsMapper">
+        SELECT *
+        FROM
+        news
+        WHERE
+        news_Title LIKE "%"#{newsTitle}"%"
+    </select>
+    <select id="listNewsByRecommend" resultMap="NewsMapper">
+        SELECT *
+        FROM
+        news
+        WHERE
+        news_isrecommend = 1
     </select>
 </mapper>

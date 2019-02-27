@@ -43,6 +43,7 @@ public class UserController {
             session.setAttribute("user",user);
             return "111";
         } else {
+            session.setAttribute("userlogin","error");
             return null;
         }
     }

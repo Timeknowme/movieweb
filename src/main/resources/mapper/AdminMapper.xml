@@ -6,4 +6,13 @@
         <result column="admin_name" property="adminName" jdbcType="VARCHAR"/>
         <result column="admin_psd" property="adminPsd" jdbcType="VARCHAR"/>
     </resultMap>
+    <select id="adminLogin" resultMap="AdminMapper" parameterType="java.lang.String">
+        SELECT *
+        FROM
+        admin
+        WHERE
+        admin_name = #{adminName}
+        AND
+        admin_psd = #{adminPsd}
+    </select>
 </mapper>

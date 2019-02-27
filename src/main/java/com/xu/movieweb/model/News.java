@@ -10,6 +10,15 @@ public class News {
     private Integer newsClick;
     private Integer newsIsRecommend;
     private Date newsCreatetime;
+    private Integer newsStatus;
+
+    public Integer getNewsStatus() {
+        return newsStatus;
+    }
+
+    public void setNewsStatus(Integer newsStatus) {
+        this.newsStatus = newsStatus;
+    }
 
     public Integer getNewsId() {
         return newsId;
