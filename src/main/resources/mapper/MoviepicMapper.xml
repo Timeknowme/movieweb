@@ -17,4 +17,20 @@
         <association property="movie" select="com.xu.movieweb.dao.MovieMapper.selectByMovieId" column="mpic_movie_id" javaType="Movie">
         </association>
     </resultMap>
+    <insert id="addMoviePic">
+        INSERT INTO moviepic(
+            mpic_address,
+            mpic_movie_id
+        ) VALUES (
+            #{picAddress},
+            #{movieId}
+        )
+    </insert>
+    <delete id="deleteMoviePic">
+        DELETE
+        FROM
+        moviepic
+        WHERE
+        mpic_id = #{moviepicId}
+    </delete>
 </mapper>

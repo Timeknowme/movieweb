@@ -17,7 +17,9 @@ public interface MovieMapper {
 
     List<Movie> listMovieByName(@Param("movieName") String movieName);
 
-    List<Movie> listMovieByTop8();
+    List<Movie> listMovieByTop();
 
     List<Movie> listMovieByType(@Param("movieType") String movieType);
+
+    void setMovieScore(@Param("movieId") Integer movieId, @Param("movieScore") float movieScore);
 }

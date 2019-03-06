@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <title>Home</title>
+    <title>Usermain</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Movie_store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
@@ -13,18 +13,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- start plugins -->
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
     <link href='http://fonts.useso.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
-    <script src="../js/responsiveslides.min.js"></script>
-    <script>
-        $(function () {
-            $("#slider").responsiveSlides({
-                auto: true,
-                nav: true,
-                speed: 500,
-                namespace: "callbacks",
-                pager: true,
-            });
-        });
-    </script>
 </head>
 <body>
 <div class="container">
@@ -51,75 +39,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="clearfix"> </div>
         </div>
-        <div class="slider">
-            <div class="callbacks_container">
-                <ul class="rslides" id="slider">
-                    <li><img src="/jsp/img/banner.jpg" class="img-responsive" alt=""/>
-                        <div class="button">
-                            <a href="#" class="hvr-shutter-out-horizontal">Watch Now</a>
-                        </div>
-                    </li>
-                    <li><img src="/jsp/img/banner1.jpg" class="img-responsive" alt=""/>
-                        <div class="button">
-                            <a href="#" class="hvr-shutter-out-horizontal">Watch Now</a>
-                        </div>
-                    </li>
-                    <li><img src="/jsp/img/banner2.jpg" class="img-responsive" alt=""/>
-                        <div class="button">
-                            <a href="#" class="hvr-shutter-out-horizontal">Watch Now</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
         <div class="content">
-            <div class="box_1">
-                <h1 class="m_2">Featurd Movies</h1>
-                <div class="search">
-                    <form action="/movie/searchMovieByName.html" method="post">
-                        <input type="text" value="Search..." onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
-                        <input type="submit" value="">
-                    </form>
+            <div class="col-md-3">
+                <div style="width:150px; border-radius:50%; overflow:hidden;text-align: center;margin-left: 20%;">
+                    <img src="${sessionScope.user.userHeadpic}" style="width: 100%;">
                 </div>
-                <div class="clearfix"> </div>
-            </div>
-            <div class="box_2">
-                <c:forEach var="movies" items="${movies}">
-                <div class="col-md-3" style="height: 350px">
-                    <a href="/movie/showMovie.html?movieId=${movies.movieId}"><img src="${movies.movieHeadpic}" style="width: 80%;"></a>
-                    <div style="text-align: center;padding-top: 10px;">
-                        <font style="font-size: 18px;">${movies.movieName}</font>
-                        <font style="margin-left: 10px;color: #FF7F50;">${movies.movieFscore}</font>
-                    </div>
+                <div style="text-align: center;margin-top: 10px;font-size: 20px;">
+                    <ul class="first">
+                        <li><a href="/collect/viewCol.html?userId=${sessionScope.user.userId}">我的收藏</a></li>
+                        <li><a href="/comment/viewcom.html?userId=${sessionScope.user.userId}">我的评论</a></li>
+                        <li><a href="/score/showScore.html?userId=${sessionScope.user.userId}">我的评分</a></li>
+                        <li><a href="/user/update.html?userId=${sessionScope.user.userId}">修改个人信息</a></li>
+                        <li><a href="/user/uploadHeadPic.html?userId=${sessionScope.user.userId}">修改头像</a></li>
+                        <li><a href="/user/updatePsd.html?userId=${sessionScope.user.userId}">修改密码</a></li>
+                    </ul>
                 </div>
-                </c:forEach>
-                <div class="clearfix"> </div>
             </div>
-            <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=3>
-            <div class="box_1">
-                <h1 class="m_2">NEWS</h1>
-                <div class="search">
-                    <form action="/news/searchNewsByName.html" method="post">
-                        <input type="text" value="Search..." onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
-                        <input type="submit" value="">
-                    </form>
-                </div>
-                <div class="clearfix"> </div>
+            <div class="col-md-8" style="text-align: center;">
+                <p style="font-size: 22px;">欢迎来到个人中心，在这里你可以通过点击左侧的导航栏进入相关页面进行浏览操作。</p>
             </div>
-            <div class="box_2" style="font-size: 20px;width: 80%;margin: 0 auto;">
-                <div><a href="">中国人民的老朋友</a></div>
-                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
-                <div><a href="">aaaaaaaaaaaaaaaaaaaaaaaaa</a></div>
-                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
-                <div><a href="">aaaaaaaaaaaaaaaaaaaaaaaaa</a></div>
-                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
-                <div><a href="">aaaaaaaaaaaaaaaaaaaaaaaaa</a></div>
-                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
-            </div>
+            <div class="clearfix"></div>
         </div>
     </div>
 </div>
-
 <div class="container">
     <footer id="footer">
         <div id="footer-3d">
@@ -173,4 +115,3 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </footer>
 </div>
 </body>
-</html>

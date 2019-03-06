@@ -14,6 +14,7 @@
         <result column="movie_time" property="movieTime" jdbcType="VARCHAR"/>
         <result column="movie_brief" property="movieBrief" jdbcType="VARCHAR"/>
         <result column="movie_headpic" property="movieHeadpic" jdbcType="VARCHAR"/>
+        <result column="movie_fscore" property="movieFscore" jdbcType="FLOAT"/>
         <result column="movie_updatetime" property="movieUpdatetime" jdbcType="TIMESTAMP"/>
         <collection property="collects" ofType="Collect" select="com.xu.movieweb.dao.CollectMapper.selectColByMovieId" column="movie_id">
         </collection>
@@ -83,8 +84,8 @@
         WHERE
         movie_name LIKE "%"#{movieName}"%"
     </select>
-    <select id="listMovieByTop8" resultMap="MovieMap">
-        SELECT movie_name
+    <select id="listMovieByTop" resultMap="MovieMap">
+        SELECT *
         FROM
         movie
         ORDER BY
@@ -99,4 +100,12 @@
         WHERE
         movie_type LIKE "%"#{movieType}"%"
     </select>
+    <update id="setMovieScore">
+        UPDATE
+        movie
+        SET
+        movie_fscore = #{movieScore}
+        WHERE
+        movie_id = #{movieId}
+    </update>
 </mapper>

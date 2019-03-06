@@ -17,11 +17,17 @@ public class MoviepicController {
     @Resource
     private MoviepicService moviepicService;
 
-    @RequestMapping(value = {"/showpics"} , method = {RequestMethod.GET})
+    @RequestMapping(value = {"/showPics"} , method = {RequestMethod.GET})
     public ModelAndView viewpics(Integer movieId){
         ModelAndView mav = new ModelAndView("col");
         List<Moviepic> moviepics = moviepicService.selectPicsByMovieId(movieId);
         mav.addObject("mpic",moviepics);
         return mav;
+    }
+
+    @RequestMapping(value = {"/deletePics"}, method = {RequestMethod.GET})
+    public String deletepics(Integer moviepicId){
+        moviepicService.deleteMoviePic(moviepicId);
+        return null;
     }
 }

@@ -19,4 +19,14 @@ public class MoviepicServiceImpl implements MoviepicService {
         List<Moviepic> moviepics = moviepicMapper.selectPicsByMovieId(movieId);
         return moviepics;
     }
+
+    @Override
+    public void addMoviePic(Integer movieId, String picAddress) {
+        moviepicMapper.addMoviePic(movieId, picAddress);
+    }
+
+    @Override
+    public void deleteMoviePic(Integer moviepicId) {
+        moviepicMapper.deleteMoviePic(moviepicId);
+    }
 }

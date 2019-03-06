@@ -24,16 +24,28 @@ public class UserController {
     @Resource
     private UserService userService;
 
+    @RequestMapping(value = {"/regist"}, method = {RequestMethod.GET})
+    public ModelAndView regist(){
+        ModelAndView mav = new ModelAndView("regist");
+        return mav;
+    }
+
     @RequestMapping(value = { "/regist" }, method = { RequestMethod.POST })
     public String addUser(User check) {
         System.out.println(check.getUserName());
         User user = userService.selectUserByName(check);
         if (user == null) {
             userService.addUser(check);
-            return "index";
+            return "redirect:/user/login.html";
         } else {
-            return "111";
+            return "redirect:/user/regist.html";
         }
+    }
+
+    @RequestMapping(value = {"/login"}, method = {RequestMethod.GET})
+    public ModelAndView login(HttpSession session){
+        ModelAndView mav = new ModelAndView("login");
+        return mav;
     }
 
     @RequestMapping(value = {"/login"}, method = {RequestMethod.POST})
@@ -41,11 +53,17 @@ public class UserController {
         User user = userService.userLogin(check.getUserName(),check.getUserPsd());
         if (user != null) {
             session.setAttribute("user",user);
-            return "111";
+            return "redirect:/user/usermain.html";
         } else {
             session.setAttribute("userlogin","error");
-            return null;
+            return "redirect:/user/login.html";
         }
+    }
+
+    @RequestMapping(value = {"/usermain"}, method = {RequestMethod.GET})
+    public ModelAndView usermain(){
+        ModelAndView mav = new ModelAndView("usermain");
+        return mav;
     }
 
     @RequestMapping(value = {"/exit"}, method = {RequestMethod.GET})
@@ -74,15 +92,22 @@ public class UserController {
         return mav;
     }
 
+    @RequestMapping(value = {"/updatePsd"}, method = {RequestMethod.GET})
+    public ModelAndView updatepsd(HttpSession session){
+        ModelAndView mav = new ModelAndView();
+        session.removeAttribute("nowpassword");
+        return mav;
+    }
+
     @RequestMapping(value = {"/updatePsd"}, method = {RequestMethod.POST})
     public String updatepsd(String oldPsd, String newPsd, HttpSession session) throws IOException {
-        session.removeAttribute("updatepsd");
         User user = (User) session.getAttribute("user");
         int userId = user.getUserId();
         String userPsd = userService.getPsdByUserId(userId);
+        //session.setAttribute("nowpassword",userPsd);
         if (userPsd.equals(oldPsd)){
             userService.updatePsdByUserId(userId,newPsd);
-            session.setAttribute("updatepsd","success");
+            session.setAttribute("nowpassword","success");
             return "redirect:/user/exit.html";
             //response.sendRedirect(request.getContextPath() + "/user/exit.html");
         } else {

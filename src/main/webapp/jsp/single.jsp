@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <title>Home</title>
+    <title>Single</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Movie_store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
@@ -13,18 +13,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- start plugins -->
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
     <link href='http://fonts.useso.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
-    <script src="../js/responsiveslides.min.js"></script>
-    <script>
-        $(function () {
-            $("#slider").responsiveSlides({
-                auto: true,
-                nav: true,
-                speed: 500,
-                namespace: "callbacks",
-                pager: true,
-            });
-        });
-    </script>
 </head>
 <body>
 <div class="container">
@@ -51,80 +39,102 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="clearfix"> </div>
         </div>
-        <div class="slider">
-            <div class="callbacks_container">
-                <ul class="rslides" id="slider">
-                    <li><img src="/jsp/img/banner.jpg" class="img-responsive" alt=""/>
-                        <div class="button">
-                            <a href="#" class="hvr-shutter-out-horizontal">Watch Now</a>
-                        </div>
-                    </li>
-                    <li><img src="/jsp/img/banner1.jpg" class="img-responsive" alt=""/>
-                        <div class="button">
-                            <a href="#" class="hvr-shutter-out-horizontal">Watch Now</a>
-                        </div>
-                    </li>
-                    <li><img src="/jsp/img/banner2.jpg" class="img-responsive" alt=""/>
-                        <div class="button">
-                            <a href="#" class="hvr-shutter-out-horizontal">Watch Now</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
         <div class="content">
-            <div class="box_1">
-                <h1 class="m_2">Featurd Movies</h1>
-                <div class="search">
-                    <form action="/movie/searchMovieByName.html" method="post">
-                        <input type="text" value="Search..." onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
-                        <input type="submit" value="">
-                    </form>
+            <div class="movie_top">
+                <div style="font-size: 30px;margin-bottom: 10px;">
+                    <span style="padding-left: 14px;">${movie.movieName}</span>
                 </div>
-                <div class="clearfix"> </div>
-            </div>
-            <div class="box_2">
-                <c:forEach var="movies" items="${movies}">
-                <div class="col-md-3" style="height: 350px">
-                    <a href="/movie/showMovie.html?movieId=${movies.movieId}"><img src="${movies.movieHeadpic}" style="width: 80%;"></a>
-                    <div style="text-align: center;padding-top: 10px;">
-                        <font style="font-size: 18px;">${movies.movieName}</font>
-                        <font style="margin-left: 10px;color: #FF7F50;">${movies.movieFscore}</font>
+                <div class="col-md-9 movie_box">
+                    <div class="grid images_3_of_2">
+                        <div class="movie_image">
+                            <img src="${movie.movieHeadpic}" class="img-responsive" alt=""/>
+                        </div>
+                    </div>
+                    <div class="desc1 span_3_of_2">
+                        <p class="movie_option"><strong>导演: </strong>${movie.movieDirector}</p>
+                        <p class="movie_option"><strong>编剧: </strong>${movie.movieWriter}</p>
+                        <p class="movie_option"><strong>主演: </strong>${movie.movieActor}</p>
+                        <p class="movie_option"><strong>类型: </strong>${movie.movieType}</p>
+                        <p class="movie_option"><strong>地区: </strong>${movie.movieLocation}</p>
+                        <p class="movie_option"><strong>语言: </strong>${movie.movieLanguage}</p>
+                        <p class="movie_option"><strong>上映时间: </strong>${movie.movieDate}</p>
+                        <p class="movie_option"><strong>时长: </strong>${movie.movieTime}</p>
+                        <div class="down_btn"><a class="btn1" href="#">收   藏</a></div>
+                    </div>
+                    <div class="clearfix"> </div>
+                    <p class="m_4">剧情简介</p>
+                    <p class="m_4">${movie.movieBrief}</p>
+                    <form action="/comment/addComment.html" method="post">
+                        <div class="to">
+                            <p>分享你的影评</p>
+                        </div>
+                        <div class="text">
+                            <textarea value="Message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message:</textarea>
+                        </div>
+                        <div class="form-submit1">
+                            <input name="submit" type="submit" id="submit" value="Submit Your Message"><br>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                    <div class="single">
+                        <h1>10 Comments</h1>
+                        <ul class="single_list">
+                            <c:forEach var="comments" items="${comments}">
+                            <li>
+                                <div class="preview"><a href="#"><img src="images/2.jpg" class="img-responsive" alt=""></a></div>
+                                <div class="data">
+                                    <div class="title">${comments.user.userName}  /  ${comments.commentUpdateTime} </div>
+                                    <p>${comments.commentText}</p>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+                            </c:forEach>
+                        </ul>
                     </div>
                 </div>
-                </c:forEach>
-                <div class="clearfix"> </div>
-            </div>
-            <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=3>
-            <div class="box_1">
-                <h1 class="m_2">NEWS</h1>
-                <div class="search">
-                    <form action="/news/searchNewsByName.html" method="post">
-                        <input type="text" value="Search..." onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
-                        <input type="submit" value="">
-                    </form>
+                <div class="col-md-3">
+                    <div class="movie_img"><div class="grid_2">
+                        <img src="images/pic6.jpg" class="img-responsive" alt="">
+                        <div class="caption1">
+                            <ul class="list_5 list_7">
+                                <li><i class="icon5"> </i><p>3,548</p></li>
+                            </ul>
+                            <i class="icon4 icon6 icon7"> </i>
+                            <p class="m_3">Guardians of the Galaxy</p>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="grid_2 col_1">
+                        <img src="images/pic2.jpg" class="img-responsive" alt="">
+                        <div class="caption1">
+                            <ul class="list_3 list_7">
+                                <li><i class="icon5"> </i><p>3,548</p></li>
+                            </ul>
+                            <i class="icon4 icon7"> </i>
+                            <p class="m_3">Guardians of the Galaxy</p>
+                        </div>
+                    </div>
+                    <div class="grid_2 col_1">
+                        <img src="images/pic9.jpg" class="img-responsive" alt="">
+                        <div class="caption1">
+                            <ul class="list_3 list_7">
+                                <li><i class="icon5"> </i><p>3,548</p></li>
+                            </ul>
+                            <i class="icon4 icon7"> </i>
+                            <p class="m_3">Guardians of the Galaxy</p>
+                        </div>
+                    </div>
                 </div>
                 <div class="clearfix"> </div>
-            </div>
-            <div class="box_2" style="font-size: 20px;width: 80%;margin: 0 auto;">
-                <div><a href="">中国人民的老朋友</a></div>
-                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
-                <div><a href="">aaaaaaaaaaaaaaaaaaaaaaaaa</a></div>
-                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
-                <div><a href="">aaaaaaaaaaaaaaaaaaaaaaaaa</a></div>
-                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
-                <div><a href="">aaaaaaaaaaaaaaaaaaaaaaaaa</a></div>
-                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
             </div>
         </div>
     </div>
 </div>
-
 <div class="container">
     <footer id="footer">
         <div id="footer-3d">
             <div class="gp-container">
-                <span class="first-widget-bend"></span>
+                <span class="first-widget-bend"> </span>
             </div>
         </div>
         <div id="footer-widgets" class="gp-footer-larger-first-col">

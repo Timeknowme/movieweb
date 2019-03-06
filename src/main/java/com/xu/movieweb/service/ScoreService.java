@@ -13,4 +13,6 @@ public abstract interface ScoreService {
     Integer listScoByMovieIdCount(Integer movieId);
 
     Integer isScore(Integer userId, Integer movieId);
+
+    List<Score> selectScoByUserId(Integer userId);
 }

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <title>Home</title>
+    <title>Updatepsd</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Movie_store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
@@ -11,20 +11,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="../css/bootstrap.css" rel='stylesheet' type='text/css' />
     <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- start plugins -->
-    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
     <link href='http://fonts.useso.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
-    <script src="../js/responsiveslides.min.js"></script>
-    <script>
-        $(function () {
-            $("#slider").responsiveSlides({
-                auto: true,
-                nav: true,
-                speed: 500,
-                namespace: "callbacks",
-                pager: true,
-            });
-        });
-    </script>
 </head>
 <body>
 <div class="container">
@@ -51,75 +39,45 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="clearfix"> </div>
         </div>
-        <div class="slider">
-            <div class="callbacks_container">
-                <ul class="rslides" id="slider">
-                    <li><img src="/jsp/img/banner.jpg" class="img-responsive" alt=""/>
-                        <div class="button">
-                            <a href="#" class="hvr-shutter-out-horizontal">Watch Now</a>
-                        </div>
-                    </li>
-                    <li><img src="/jsp/img/banner1.jpg" class="img-responsive" alt=""/>
-                        <div class="button">
-                            <a href="#" class="hvr-shutter-out-horizontal">Watch Now</a>
-                        </div>
-                    </li>
-                    <li><img src="/jsp/img/banner2.jpg" class="img-responsive" alt=""/>
-                        <div class="button">
-                            <a href="#" class="hvr-shutter-out-horizontal">Watch Now</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
         <div class="content">
-            <div class="box_1">
-                <h1 class="m_2">Featurd Movies</h1>
-                <div class="search">
-                    <form action="/movie/searchMovieByName.html" method="post">
-                        <input type="text" value="Search..." onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
-                        <input type="submit" value="">
-                    </form>
+            <div class="col-md-3">
+                <div style="width:150px; border-radius:50%; overflow:hidden;text-align: center;margin-left: 20%;">
+                    <img src="images/1.jpg" style="width: 100%;">
                 </div>
-                <div class="clearfix"> </div>
+                <div style="text-align: center;margin-top: 10px;font-size: 20px;">
+                    <ul class="first">
+                        <li><a href="/collect/viewCol.html?userId=${sessionScope.user.userId}">我的收藏</a></li>
+                        <li><a href="/comment/viewcom.html?userId=${sessionScope.user.userId}">我的评论</a></li>
+                        <li><a href="/score/showScore.html?userId=${sessionScope.user.userId}">我的评分</a></li>
+                        <li><a href="/user/update.html?userId=${sessionScope.user.userId}">修改个人信息</a></li>
+                        <li><a href="/user/uploadHeadPic.html?userId=${sessionScope.user.userId}">修改头像</a></li>
+                        <li><a href="/user/updatePsd.html?userId=${sessionScope.user.userId}">修改密码</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="box_2">
-                <c:forEach var="movies" items="${movies}">
-                <div class="col-md-3" style="height: 350px">
-                    <a href="/movie/showMovie.html?movieId=${movies.movieId}"><img src="${movies.movieHeadpic}" style="width: 80%;"></a>
-                    <div style="text-align: center;padding-top: 10px;">
-                        <font style="font-size: 18px;">${movies.movieName}</font>
-                        <font style="margin-left: 10px;color: #FF7F50;">${movies.movieFscore}</font>
+            <div class="col-md-8">
+                <c:forEach var="collect" items="${collect}">
+                <div style="width:100%;height: 160px;">
+                    <div class="col-md-3">
+                        <img src="${collect.movie.movieHeadpic}" style="width:100%;">
+                    </div>
+                    <div class="col-md-8">
+                        <a href=""><p style="font-size: 18px;">${collect.movie.movie}</p></a>
+                        <div style="margin-top:10px;"><p style="font-size: 12px;">${collect.movie.movieFscore}（人数）</p></div>
+                        <div style="margin-top:10px;"><p style="font-size: 13px;color: #A9A9A9">${collect.movie.movieLocation}/${collect.movie.movieType}/${collect.movie.movieDate}</p></div>
+                        <div style="margin-top:10px;"><p style="font-size: 13px;color: #A9A9A9">${collect.movie.movieActor}</p></div>
+                    </div>
+                    <div class="col-md-2" style="float: right;">
+                        <a href="/collect/deleteCol.html?userId=">取消收藏</a>
                     </div>
                 </div>
+                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
                 </c:forEach>
-                <div class="clearfix"> </div>
             </div>
-            <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=3>
-            <div class="box_1">
-                <h1 class="m_2">NEWS</h1>
-                <div class="search">
-                    <form action="/news/searchNewsByName.html" method="post">
-                        <input type="text" value="Search..." onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
-                        <input type="submit" value="">
-                    </form>
-                </div>
-                <div class="clearfix"> </div>
-            </div>
-            <div class="box_2" style="font-size: 20px;width: 80%;margin: 0 auto;">
-                <div><a href="">中国人民的老朋友</a></div>
-                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
-                <div><a href="">aaaaaaaaaaaaaaaaaaaaaaaaa</a></div>
-                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
-                <div><a href="">aaaaaaaaaaaaaaaaaaaaaaaaa</a></div>
-                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
-                <div><a href="">aaaaaaaaaaaaaaaaaaaaaaaaa</a></div>
-                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
-            </div>
+            <div class="clearfix"></div>
         </div>
     </div>
 </div>
-
 <div class="container">
     <footer id="footer">
         <div id="footer-3d">
@@ -173,4 +131,3 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </footer>
 </div>
 </body>
-</html>

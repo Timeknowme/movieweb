@@ -34,4 +34,9 @@ public class CollectServiceImpl implements CollectService {
     public Integer isCollected(Integer userId, Integer movieId) {
         return collectMapper.isCollected(userId, movieId);
     }
+
+    @Override
+    public void delCollect(Integer collectId) {
+        collectMapper.delCollect(collectId);
+    }
 }

@@ -16,4 +16,6 @@ public interface CollectMapper {
     void deleteCollect(@Param("userId") Integer userId,@Param("movieId") Integer movieId);
 
     Integer isCollected(@Param("userId") Integer userId,@Param("movieId") Integer movieId);
+
+    void delCollect(@Param("collectId") Integer collectId);
 }

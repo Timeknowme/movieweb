@@ -55,4 +55,9 @@
         AND
         c.collect_movie_id = #{movieId}
     </select>
+    <delete id="delCollect">
+        DELETE FROM collect
+        WHERE
+        col_id = #{collectId}
+    </delete>
 </mapper>

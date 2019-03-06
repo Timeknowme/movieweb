@@ -3,10 +3,12 @@ package com.xu.movieweb.service.impl;
 import com.xu.movieweb.dao.NewsMapper;
 import com.xu.movieweb.model.News;
 import com.xu.movieweb.service.NewsService;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
+@Service
 public class NewsServiceImpl implements NewsService {
 
     @Resource

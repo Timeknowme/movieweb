@@ -16,7 +16,9 @@ public abstract interface MovieService {
 
     List<Movie> listMovieByName(String movieName);
 
-    List<Movie> listMovieByTop8();
+    List<Movie> listMovieByTop();
 
     List<Movie> listMovieByType(String movieType);
+
+    void setMovieScore(Integer movieId, float movieScore);
 }
