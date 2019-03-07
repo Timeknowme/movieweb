@@ -78,6 +78,8 @@
         news
         WHERE
         news_Title LIKE "%"#{newsTitle}"%"
+        AND
+        news_Status = 1
     </select>
     <select id="listNewsByRecommend" resultMap="NewsMapper">
         SELECT *
@@ -85,5 +87,12 @@
         news
         WHERE
         news_isrecommend = 1
+        AND
+        news_Status = 1
+    </select>
+    <select id="listNews" resultMap="NewsMapper">
+        SELECT *
+        FROM
+        news
     </select>
 </mapper>

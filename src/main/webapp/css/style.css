@@ -1228,7 +1228,27 @@ border: none;
 cursor: pointer;
 outline: none;
 }
+.form-submit1 input[type="button"] {
+	color: #FFF;
+	font-size: 1.1em;
+	font-weight: normal;
+	padding: 10px 20px;
+	text-transform: uppercase;
+	background:#d8232a;
+	display: inline-block;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	-ms-transition: all 0.3s ease-out;
+	-o-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out;
+	border: none;
+	cursor: pointer;
+	outline: none;
+}
 .form-submit1 input[type="submit"]:hover{
+	background: #3f444e;
+}
+.form-submit1 input[type="button"]:hover{
 	background: #3f444e;
 }
 /*--login--*/
@@ -1277,6 +1297,14 @@ text-transform: uppercase;
 	
 }
 .login-right input[type="text"] {
+	border: 1px solid #E4E4E4;
+	outline-color:#d8232a;
+	width: 96%;
+	font-size:0.8125em;
+	padding:10px;
+	-webkit-appearance: none;
+}
+.login-right input[type="password"] {
 	border: 1px solid #E4E4E4;
 	outline-color:#d8232a;
 	width: 96%;
@@ -1633,6 +1661,10 @@ h1.recent {
 	font-size: 1em;
 	padding: 7px 10px;
 }
+	.form-submit1 input[type="button"] {
+		font-size: 1em;
+		padding: 7px 10px;
+	}
 .preview {
 	width: 13.5%;
 	margin-right:2%;

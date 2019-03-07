@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <title>Updatepsd</title>
+    <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Movie_store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
@@ -11,7 +11,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="../css/bootstrap.css" rel='stylesheet' type='text/css' />
     <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- start plugins -->
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
     <link href='http://fonts.useso.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -50,41 +50,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="clearfix"> </div>
         </div>
         <div class="content">
-            <div class="col-md-3">
-                <div style="width:150px; border-radius:50%; overflow:hidden;text-align: center;margin-left: 20%;">
-                    <img src="${sessionScope.user.userHeadpic}" style="width: 100%;">
+            <div class="register">
+                <div class="col-md-6 login-left">
+                    <h3>Admin Login</h3>
                 </div>
-                <div style="text-align: center;margin-top: 10px;font-size: 20px;">
-                    <ul class="first">
-                        <li><a href="/collect/viewCol.html?userId=${sessionScope.user.userId}">我的收藏</a></li>
-                        <li><a href="/comment/viewcom.html?userId=${sessionScope.user.userId}">我的评论</a></li>
-                        <li><a href="/score/showScore.html?userId=${sessionScope.user.userId}">我的评分</a></li>
-                        <li><a href="/user/update.html?userId=${sessionScope.user.userId}">修改个人信息</a></li>
-                        <li><a href="/user/uploadHeadPic.html?userId=${sessionScope.user.userId}">修改头像</a></li>
-                        <li><a href="/user/updatePsd.html?userId=${sessionScope.user.userId}">修改密码</a></li>
-                    </ul>
+                <div class="col-md-6 login-right">
+                    <h3>Admin</h3>
+                    <form action="/admin/adminLogin.html" method="post">
+                        <div>
+                            <span>用户名<label>*</label></span>
+                            <input type="text" name="adminName">
+                        </div>
+                        <div>
+                            <span>密码<label>*</label></span>
+                            <input type="password" name="adminPsd">
+                        </div>
+                        <input type="submit" value="登录">
+                    </form>
+                    <%
+                        Object s = session.getAttribute("adminlogin");
+                        if(s != null && s.equals("error")){%>
+                    <script type="text/javascript">
+                        alert("用户名或者密码错误");
+                    </script>
+                    <%
+                            session.removeAttribute("adminlogin");}
+                    %>
                 </div>
+                <div class="clearfix"> </div>
             </div>
-            <div class="col-md-8">
-                <c:forEach var="collect" items="${collect}">
-                <div style="width:100%;height: 160px;">
-                    <div class="col-md-3">
-                        <img src="${collect.movie.movieHeadpic}" style="width:100%;">
-                    </div>
-                    <div class="col-md-8">
-                        <a href="/movie/showMovie.html?movieId=${collect.movie.movieId}"><p style="font-size: 18px;">${collect.movie.movieName}</p></a>
-                        <div style="margin-top:10px;"><p style="font-size: 12px;">评分：${collect.movie.movieFscore}</p></div>
-                        <div style="margin-top:10px;"><p style="font-size: 13px;color: #A9A9A9">${collect.movie.movieLocation}/${collect.movie.movieType}/${collect.movie.movieDate}</p></div>
-                        <div style="margin-top:10px;"><p style="font-size: 13px;color: #A9A9A9">${collect.movie.movieActor}</p></div>
-                    </div>
-                    <div class="col-md-2" style="float: right;">
-                        <a href="/collect/deleteCol.html?collectId=${collect.collectId}">取消收藏</a>
-                    </div>
-                </div>
-                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
-                </c:forEach>
-            </div>
-            <div class="clearfix"></div>
         </div>
     </div>
 </div>
@@ -92,7 +86,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <footer id="footer">
         <div id="footer-3d">
             <div class="gp-container">
-                <span class="first-widget-bend"></span>
+                <span class="first-widget-bend"> </span>
             </div>
         </div>
         <div id="footer-widgets" class="gp-footer-larger-first-col">
@@ -141,3 +135,4 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </footer>
 </div>
 </body>
+</html>

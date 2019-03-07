@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
     <title>Single</title>
@@ -31,9 +32,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="col-sm-3 header_right">
                 <ul class="header_right_box">
-                    <li><p><a href="/user/regist.html">注册</a></p></li>
-                    <li><p><a href="/user/login.html">登录</a></p></li>
-                    <li class="last"><i class="edit"> </i></li>
+                    <c:if test="${sessionScope.user == null && sessionScope.admin == null}">
+                        <li><p><a href="/user/regist.html">注册</a></p></li>
+                        <li><p><a href="/user/login.html">登录</a></p></li>
+                        <li><p><a href="/admin/adminLogin.html">管理员</a></p></li>
+                    </c:if>
+                    <c:if test="${sessionScope.user != null}">
+                        <li style="width:50%;"><a href="/user/usermain.html?userId=${sessionScope.user.userId}"><img src="${sessionScope.user.userHeadpic}" style="width:60%;border-radius:50%;float: left;"></a> </li>
+                        <li style="margin-top: 10px;"><p><a href="/user/exit.html">exit</a></p></li>
+                    </c:if>
+                    <c:if test="${sessionScope.admin != null}">
+                        <li><p><a href="/admin/adminmain.html?adminId=${sessionScope.admin.adminId}">${sessionScope.admin.adminName}</a></p></li>
+                        <li><p><a href="/admin/adminexit.html">exit</a></p></li>
+                    </c:if>
                     <div class="clearfix"> </div>
                 </ul>
             </div>
@@ -59,8 +70,20 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <p class="movie_option"><strong>语言: </strong>${movie.movieLanguage}</p>
                         <p class="movie_option"><strong>上映时间: </strong>${movie.movieDate}</p>
                         <p class="movie_option"><strong>时长: </strong>${movie.movieTime}</p>
-                        <div class="down_btn"><a class="btn1" href="#">收   藏</a></div>
+                        <c:if test="${sessionScope.user != null}">
+                            <c:if test="${isCollect == null}">
+                                <div class="down_btn"><a class="btn1" href="/collect/addCol.html?userId=${sessionScope.user.userId}&movieId=${movie.movieId}">收   藏</a></div>
+                            </c:if>
+                            <c:if test="${isCollect != null}">
+                                <div class="down_btn"><a class="btn1" href="/collect/deleteColMovie.html?userId=${sessionScope.user.userId}&movieId=${movie.movieId}">取消收藏</a></div>
+                            </c:if>
+                        </c:if>
+                        <c:if test="${sessionScope.user == null}">
+                            <div class="down_btn"><a class="btn1" href="/user/login.html">收   藏</a></div>
+                        </c:if>
                     </div>
+
+
                     <div class="clearfix"> </div>
                     <p class="m_4">剧情简介</p>
                     <p class="m_4">${movie.movieBrief}</p>
@@ -69,21 +92,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <p>分享你的影评</p>
                         </div>
                         <div class="text">
-                            <textarea value="Message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message:</textarea>
+                            <textarea name="text" value="Message:" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message';}">Message:</textarea>
+                            <input type="hidden" name="userId" value="${sessionScope.user.userId}">
+                            <input type="hidden" name="movieId" value="${movie.movieId}">
                         </div>
                         <div class="form-submit1">
-                            <input name="submit" type="submit" id="submit" value="Submit Your Message"><br>
+                            <c:if test="${sessionScope.user != null}">
+                                <input name="submit" type="submit" id="submit" value="发表影评"><br>
+                            </c:if>
+                            <c:if test="${sessionScope.user == null}">
+                                <input name="submit" type="button" id="submit" value="发表影评" onclick="window.location='/user/login.html'"><br>
+                            </c:if>
                         </div>
                         <div class="clearfix"></div>
                     </form>
                     <div class="single">
-                        <h1>10 Comments</h1>
+                        <h1>Comments</h1>
                         <ul class="single_list">
                             <c:forEach var="comments" items="${comments}">
                             <li>
-                                <div class="preview"><a href="#"><img src="images/2.jpg" class="img-responsive" alt=""></a></div>
+                                <div class="preview"><a href="#"><img src="${comments.user.userHeadpic}" class="img-responsive" alt=""></a></div>
                                 <div class="data">
-                                    <div class="title">${comments.user.userName}  /  ${comments.commentUpdateTime} </div>
+                                    <div class="title">${comments.user.userName}  /  <fmt:formatDate value="${comments.commentUpdateTime}" pattern="yyyy年MM月dd日HH点mm分ss秒" />  </div>
                                     <p>${comments.commentText}</p>
                                 </div>
                                 <div class="clearfix"></div>

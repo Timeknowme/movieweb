@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-    <title>Updatepsd</title>
+    <title>Update</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Movie_store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
@@ -11,7 +11,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="../css/bootstrap.css" rel='stylesheet' type='text/css' />
     <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- start plugins -->
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
     <link href='http://fonts.useso.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -65,24 +65,60 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </ul>
                 </div>
             </div>
-            <div class="col-md-8">
-                <c:forEach var="collect" items="${collect}">
-                <div style="width:100%;height: 160px;">
-                    <div class="col-md-3">
-                        <img src="${collect.movie.movieHeadpic}" style="width:100%;">
-                    </div>
-                    <div class="col-md-8">
-                        <a href="/movie/showMovie.html?movieId=${collect.movie.movieId}"><p style="font-size: 18px;">${collect.movie.movieName}</p></a>
-                        <div style="margin-top:10px;"><p style="font-size: 12px;">评分：${collect.movie.movieFscore}</p></div>
-                        <div style="margin-top:10px;"><p style="font-size: 13px;color: #A9A9A9">${collect.movie.movieLocation}/${collect.movie.movieType}/${collect.movie.movieDate}</p></div>
-                        <div style="margin-top:10px;"><p style="font-size: 13px;color: #A9A9A9">${collect.movie.movieActor}</p></div>
-                    </div>
-                    <div class="col-md-2" style="float: right;">
-                        <a href="/collect/deleteCol.html?collectId=${collect.collectId}">取消收藏</a>
-                    </div>
+            <div class="col-md-7">
+                <div>
+                    <h1 style="font-size: 25px;">修改个人信息</h1>
                 </div>
-                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
-                </c:forEach>
+                <form class="form-horizontal" style="text-align: center;margin-top: 20px;" action="/user/update.html" method="post">
+                    <div class="form-group">
+                        <label for="userRealname" class="col-sm-2 control-label">姓名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="userRealname" id="userRealname" value="${user.userRealname}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userSex" class="col-sm-2 control-label">性别</label>
+                        <div>
+                            <label class="radio-inline">
+                                <input type="radio" name="userSex" id="userSex1" value="男"> 男
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="userSex" id="userSex"  value="女"> 女
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userBirth" class="col-sm-2 control-label">生日</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="userBirth" id="userBirth" value="${user.userBirth}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userCity" class="col-sm-2 control-label">所在城市</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="userCity" id="userCity" value="${user.userCity}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userEmail" class="col-sm-2 control-label">email</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="userEmail" id="userEmail" value="${user.userEmail}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userQQ" class="col-sm-2 control-label">QQ</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="userQQ" id="userQQ" value="${user.userQQ}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userTelphone" class="col-sm-2 control-label">联系方式</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="userTelphone" id="userTelphone" value="${user.userTelphone}" oninput="value=value.replace(/[^\d]/g,'')">
+                        </div>
+                    </div>
+                    <input type="submit" name="" value="提交" class="btn btn-primary" style="width: 100px;">
+                </form>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -141,3 +177,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </footer>
 </div>
 </body>
+<script type="text/javascript">
+    var sextype = ${user.userSex};
+    if(sextype=="男"){
+        document.getElementById("sex1").checked = true;
+    } else {
+        document.getElementById("sex").checked = true;
+    }
+
+</script>
+</html>

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -69,12 +71,12 @@ public class UserController {
     @RequestMapping(value = {"/exit"}, method = {RequestMethod.GET})
     public String exit(HttpSession session){
         session.removeAttribute("user");
-        return "login";
+        return "redirect:/movie/showIndex.html";
     }
 
     @RequestMapping(value = {"/update"}, method = RequestMethod.GET)
     public ModelAndView viewUpdate(Integer userId){
-        ModelAndView mav = new ModelAndView("col");
+        ModelAndView mav = new ModelAndView("update");
         User user = userService.selectByUserId(userId);
         mav.addObject("user",user);
         return mav;
@@ -82,7 +84,7 @@ public class UserController {
 
     @RequestMapping(value = {"/update"}, method = {RequestMethod.POST})
     public ModelAndView update(User user, HttpSession session){
-        ModelAndView mav = new ModelAndView("col");
+        ModelAndView mav = new ModelAndView("update");
         User sessionUser = (User) session.getAttribute("user");
         Integer userId = sessionUser.getUserId();
         userService.updateUser(user,userId);
@@ -94,13 +96,13 @@ public class UserController {
 
     @RequestMapping(value = {"/updatePsd"}, method = {RequestMethod.GET})
     public ModelAndView updatepsd(HttpSession session){
-        ModelAndView mav = new ModelAndView();
+        ModelAndView mav = new ModelAndView("updatepsd");
         session.removeAttribute("nowpassword");
         return mav;
     }
 
     @RequestMapping(value = {"/updatePsd"}, method = {RequestMethod.POST})
-    public String updatepsd(String oldPsd, String newPsd, HttpSession session) throws IOException {
+    public String updatepsd(String oldPsd, String newPsd, HttpSession session, RedirectAttributes attr) throws IOException {
         User user = (User) session.getAttribute("user");
         int userId = user.getUserId();
         String userPsd = userService.getPsdByUserId(userId);
@@ -111,8 +113,9 @@ public class UserController {
             return "redirect:/user/exit.html";
             //response.sendRedirect(request.getContextPath() + "/user/exit.html");
         } else {
+            attr.addAttribute("userId",userId);
             session.setAttribute("updatepsd","error");
-            return "111";
+            return "redirect:/user/updatePsd.html";
         }
     }
 
@@ -136,7 +139,7 @@ public class UserController {
         String uuid = UUID.randomUUID().toString().replaceAll("-","");
         String contentType=file.getContentType();
         String imageName=contentType.substring(contentType.indexOf("/")+1);
-        path="/jsp/img/"+uuid+"."+imageName;
+        path="/jsp/img/user/"+uuid+"."+imageName;
         File newfile=new File(filePath + path);
         try {
             file.transferTo(newfile);
@@ -150,5 +153,19 @@ public class UserController {
         User newUser = userService.selectByUserId(userId);
         session.setAttribute("user",newUser);
         return mav;
+    }
+
+    @RequestMapping(value = {"/listAllUser"}, method = {RequestMethod.GET})
+    public ModelAndView listalluser(){
+        ModelAndView mav = new ModelAndView("manageuser");
+        List<User> userList = userService.listUser();
+        mav.addObject("userList",userList);
+        return mav;
+    }
+
+    @RequestMapping(value = {"/deleteUser"}, method = {RequestMethod.GET})
+    public String deleteuser(Integer userId){
+        userService.deleteUser(userId);
+        return "redirect:/user/listAllUser.html";
     }
 }

@@ -35,11 +35,13 @@
         INSERT INTO comment(
             comment_user_id,
             comment_movie_id,
-            comment_text
+            comment_text,
+            comment_updatetime
         ) VALUES (
             #{userId},
             #{movieId},
-            #{text}
+            #{text},
+            #{time}
         )
     </insert>
     <delete id="deleteComment">

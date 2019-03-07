@@ -11,7 +11,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="../css/bootstrap.css" rel='stylesheet' type='text/css' />
     <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- start plugins -->
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
     <link href='http://fonts.useso.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -65,24 +65,43 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </ul>
                 </div>
             </div>
-            <div class="col-md-8">
-                <c:forEach var="collect" items="${collect}">
-                <div style="width:100%;height: 160px;">
-                    <div class="col-md-3">
-                        <img src="${collect.movie.movieHeadpic}" style="width:100%;">
-                    </div>
-                    <div class="col-md-8">
-                        <a href="/movie/showMovie.html?movieId=${collect.movie.movieId}"><p style="font-size: 18px;">${collect.movie.movieName}</p></a>
-                        <div style="margin-top:10px;"><p style="font-size: 12px;">评分：${collect.movie.movieFscore}</p></div>
-                        <div style="margin-top:10px;"><p style="font-size: 13px;color: #A9A9A9">${collect.movie.movieLocation}/${collect.movie.movieType}/${collect.movie.movieDate}</p></div>
-                        <div style="margin-top:10px;"><p style="font-size: 13px;color: #A9A9A9">${collect.movie.movieActor}</p></div>
-                    </div>
-                    <div class="col-md-2" style="float: right;">
-                        <a href="/collect/deleteCol.html?collectId=${collect.collectId}">取消收藏</a>
-                    </div>
+            <div class="col-md-7">
+                <div>
+                    <h1 style="font-size: 25px;">修改密码</h1>
                 </div>
-                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
-                </c:forEach>
+                <form class="form-horizontal" style="text-align: center;margin-top: 20px;" action="/user/updatePsd.html" method="post">
+                    <div class="form-group">
+                        <label for="oldPsd" class="col-sm-2 control-label">原密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" name="oldPsd" id="oldPsd" placeholder="请输入原密码" onblur="checkpass2()">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPsd" class="col-sm-2 control-label">新密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" name="newPsd" id="newPsd" placeholder="请输入新密码">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="check" class="col-sm-2 control-label">确认密码</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" name="check" id="check" placeholder="请确认密码" onblur="checkpass2()">
+                        </div>
+                    </div>
+                    <input type="submit" name="" id="button" value="提交" class="btn btn-primary" style="width: 100px;"  disabled="disabled">
+                </form>
+                <%
+                    Object s = session.getAttribute("updatepsd");
+                    if(s != null && s.equals("success")){%>
+                <script type="text/javascript">
+                    alert("修改成功，请重新登录");
+                </script>
+                <%}else if(s != null && s.equals("error")){%>
+                <script type="text/javascript">
+                    alert("修改失败");
+                </script>
+                <%}
+                %>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -141,3 +160,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </footer>
 </div>
 </body>
+<script type="text/javascript">
+    var psd1 = document.getElementById('newPsd');
+    var psd2 = document.getElementById('check');
+    var un = document.getElementById('oldPsd');
+    function checkpass2(){
+        if(psd1.value!=psd2.value){
+            alert("确认密码错误！");
+        }
+        if(psd1.value==psd2.value && un.value != '' && psd1.value != '' && psd2.value != ''){
+            document.getElementById('button').disabled=false;
+        }
+    }
+</script>
+</html>

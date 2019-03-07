@@ -6,7 +6,7 @@ import java.util.List;
 
 public abstract interface CommentService {
 
-    void addComment(Integer userId, Integer movieId, String text);
+    void addComment(Integer userId, Integer movieId, String text, String time);
 
     List<Comment> selectComByMovieId(Integer movieId);
 

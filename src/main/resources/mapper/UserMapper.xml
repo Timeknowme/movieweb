@@ -86,4 +86,16 @@
         WHERE
         user_id = #{userId}
     </update>
+    <select id="listUser" resultMap="UserMap">
+        SELECT *
+        FROM
+        `user`
+    </select>
+    <delete id="deleteUser">
+        DELETE
+        FROM
+        `user`
+        WHERE
+        user_id = #{userId}
+    </delete>
 </mapper>

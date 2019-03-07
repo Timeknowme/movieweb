@@ -43,7 +43,8 @@
             movie_language,
             movie_date,
             movie_time,
-            movie_brief
+            movie_brief,
+            movie_headpic
         ) VALUES (
             #{movie.movieName},
             #{movie.movieDirector},
@@ -54,7 +55,8 @@
             #{movie.movieLanguage},
             #{movie.movieDate},
             #{movie.movieTime},
-            #{movie.movieBrief}
+            #{movie.movieBrief},
+            #{movie.movieHeadpic}
         )
     </insert>
     <update id="updateMovie">
@@ -108,4 +110,9 @@
         WHERE
         movie_id = #{movieId}
     </update>
+    <select id="listMovie" resultMap="MovieMap">
+        SELECT *
+        FROM
+        movie
+    </select>
 </mapper>

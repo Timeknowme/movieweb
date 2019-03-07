@@ -58,4 +58,9 @@ public class NewsServiceImpl implements NewsService {
     public List<News> listNewsByRecommend() {
         return newsMapper.listNewsByRecommend();
     }
+
+    @Override
+    public List<News> listNews() {
+        return newsMapper.listNews();
+    }
 }

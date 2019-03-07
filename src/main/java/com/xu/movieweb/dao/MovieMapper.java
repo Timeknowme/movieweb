@@ -22,4 +22,6 @@ public interface MovieMapper {
     List<Movie> listMovieByType(@Param("movieType") String movieType);
 
     void setMovieScore(@Param("movieId") Integer movieId, @Param("movieScore") float movieScore);
+
+    List<Movie> listMovie();
 }

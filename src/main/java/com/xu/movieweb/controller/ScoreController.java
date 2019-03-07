@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -24,7 +25,7 @@ public class ScoreController {
     MovieService movieService;
 
     @RequestMapping(value = {"/addScore"} , method = {RequestMethod.POST})
-    public String addscore(Integer userId, Integer movieId, Integer scoreNum){
+    public String addscore(Integer userId, Integer movieId, Integer scoreNum, RedirectAttributes attr){
         int total = 0;
         int fscore = 0;
         scoreService.addScore(userId, movieId, scoreNum);
@@ -35,14 +36,15 @@ public class ScoreController {
         }
         fscore = total / scoreCount;
         movieService.setMovieScore(movieId,fscore);
-        return "111";
+        attr.addAttribute("movieId",movieId);
+        return "redirect:/movie/showMovie.html";
     }
 
     @RequestMapping(value = {"/showScore"}, method = {RequestMethod.GET})
-    public ModelAndView showscore(HttpSession session){
-        ModelAndView mav = new ModelAndView();
-        User user = (User) session.getAttribute("user");
-        Integer userId = user.getUserId();
+    public ModelAndView showscore(Integer userId){
+        ModelAndView mav = new ModelAndView("myscore");
+//        User user = (User) session.getAttribute("user");
+//        Integer userId = user.getUserId();
         List<Score> scores = scoreService.selectScoByUserId(userId);
         mav.addObject("scores",scores);
         return mav;

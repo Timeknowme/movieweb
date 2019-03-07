@@ -11,7 +11,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="../css/bootstrap.css" rel='stylesheet' type='text/css' />
     <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- start plugins -->
-    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
     <link href='http://fonts.useso.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -66,19 +66,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 </div>
             </div>
             <div class="col-md-8">
-                <c:forEach var="collect" items="${collect}">
+                <c:forEach var="comments" items="${comments}">
                 <div style="width:100%;height: 160px;">
                     <div class="col-md-3">
-                        <img src="${collect.movie.movieHeadpic}" style="width:100%;">
+                        <img src="${comments.movie.movieHeadpic}" style="width:100%;">
                     </div>
                     <div class="col-md-8">
-                        <a href="/movie/showMovie.html?movieId=${collect.movie.movieId}"><p style="font-size: 18px;">${collect.movie.movieName}</p></a>
-                        <div style="margin-top:10px;"><p style="font-size: 12px;">评分：${collect.movie.movieFscore}</p></div>
-                        <div style="margin-top:10px;"><p style="font-size: 13px;color: #A9A9A9">${collect.movie.movieLocation}/${collect.movie.movieType}/${collect.movie.movieDate}</p></div>
-                        <div style="margin-top:10px;"><p style="font-size: 13px;color: #A9A9A9">${collect.movie.movieActor}</p></div>
+                        <a href=""><p style="font-size: 18px;">${comments.movie.movieName}</p></a>
+                        <div style="margin-top:10px;"><p style="font-size: 12px;">评分：${comments.movie.movieFscore}</p></div>
+                        <div style="margin-top:10px;"><p style="font-size: 13px;color: #A9A9A9">${comments.commentText}</p></div>
                     </div>
                     <div class="col-md-2" style="float: right;">
-                        <a href="/collect/deleteCol.html?collectId=${collect.collectId}">取消收藏</a>
+                        <a href="/comment/deletecom.html?commentId=${comments.commentId}">删除评论</a>
                     </div>
                 </div>
                 <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>

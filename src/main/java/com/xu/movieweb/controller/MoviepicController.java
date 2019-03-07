@@ -19,7 +19,7 @@ public class MoviepicController {
 
     @RequestMapping(value = {"/showPics"} , method = {RequestMethod.GET})
     public ModelAndView viewpics(Integer movieId){
-        ModelAndView mav = new ModelAndView("col");
+        ModelAndView mav = new ModelAndView();
         List<Moviepic> moviepics = moviepicService.selectPicsByMovieId(movieId);
         mav.addObject("mpic",moviepics);
         return mav;

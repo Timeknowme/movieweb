@@ -23,4 +23,6 @@ public interface NewsService {
     List<News> listNewsByTitle(String newsTitle);
 
     List<News> listNewsByRecommend();
+
+    List<News> listNews();
 }

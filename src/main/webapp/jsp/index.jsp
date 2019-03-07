@@ -43,9 +43,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="col-sm-3 header_right">
                 <ul class="header_right_box">
+                    <c:if test="${sessionScope.user == null && sessionScope.admin == null}">
                     <li><p><a href="/user/regist.html">注册</a></p></li>
                     <li><p><a href="/user/login.html">登录</a></p></li>
-                    <li class="last"><i class="edit"> </i></li>
+                    <li><p><a href="/admin/adminLogin.html">管理员</a></p></li>
+                    </c:if>
+                    <c:if test="${sessionScope.user != null}">
+                        <li style="width:50%;"><a href="/user/usermain.html?userId=${sessionScope.user.userId}"><img src="${sessionScope.user.userHeadpic}" style="width:60%;border-radius:50%;float: left;"></a> </li>
+                        <li style="margin-top: 10px;"><p><a href="/user/exit.html">exit</a></p></li>
+                    </c:if>
+                    <c:if test="${sessionScope.admin != null}">
+                        <li><p><a href="/admin/adminmain.html?adminId=${sessionScope.admin.adminId}">${sessionScope.admin.adminName}</a></p></li>
+                        <li><p><a href="/admin/adminexit.html">exit</a></p></li>
+                    </c:if>
                     <div class="clearfix"> </div>
                 </ul>
             </div>

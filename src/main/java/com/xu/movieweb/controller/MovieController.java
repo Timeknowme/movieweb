@@ -5,11 +5,17 @@ import com.xu.movieweb.service.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping({"/movie"})
@@ -30,23 +36,48 @@ public class MovieController {
     @Resource
     NewsService newsService;
 
+    @RequestMapping(value = {"/addMovie"}, method = {RequestMethod.GET})
+    public ModelAndView addmovie(){
+        ModelAndView mav = new ModelAndView("addmovie");
+        return mav;
+    }
+
     @RequestMapping(value = {"/addMovie"}, method = {RequestMethod.POST})
-    public String addmovie(Movie movie){
+    public String addmovie(Movie movie, HttpServletRequest request){
+        String path="";
+        String filePath = request.getSession().getServletContext().getRealPath("/");
+        MultipartHttpServletRequest multipartRequest =(MultipartHttpServletRequest)request;
+        MultipartFile file=multipartRequest.getFile("pic");
+        String uuid = UUID.randomUUID().toString().replaceAll("-","");
+        String contentType=file.getContentType();
+        String imageName=contentType.substring(contentType.indexOf("/")+1);
+        path="/jsp/img/movie/"+uuid+"."+imageName;
+        File newfile=new File(filePath + path);
+        try {
+            file.transferTo(newfile);
+        }
+        catch(IllegalStateException e) {
+            e.printStackTrace();
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println(path);
+        movie.setMovieHeadpic(path);
         movieService.addMovie(movie);
-        return null;
+        return "redirect:/movie/listAllMovie.html";
     }
 
     @RequestMapping(value = {"/updateMovie"}, method = {RequestMethod.GET})
     public ModelAndView viewupdate(Integer movieId){
-        ModelAndView mav = new ModelAndView("addmovie");
+        ModelAndView mav = new ModelAndView("editmovie");
         Movie movie = movieService.selectByMovieId(movieId);
         mav.addObject("movie",movie);
         return mav;
     }
 
     @RequestMapping(value = {"/updateMovie"}, method = {RequestMethod.POST})
-    public ModelAndView updatemovie(Movie movie,Integer movieId){
-        ModelAndView mav = new ModelAndView("addmovie");
+    public ModelAndView updatemovie(Movie movie,Integer movieId,HttpServletRequest request){
+        ModelAndView mav = new ModelAndView("editmovie");
         movieService.updateMovie(movie,movieId);
         Movie newMovie = movieService.selectByMovieId(movieId);
         mav.addObject("movie",newMovie);
@@ -56,7 +87,7 @@ public class MovieController {
     @RequestMapping(value = {"/deleteMovie"}, method = {RequestMethod.GET})
     public String deletemovie(Integer movieId){
         movieService.deleteMovie(movieId);
-        return "111";
+        return "redirect:/movie/listAllMovie.html";
     }
 
     @RequestMapping(value = {"/showTop"}, method = {RequestMethod.GET})
@@ -69,7 +100,7 @@ public class MovieController {
 
     @RequestMapping(value = {"/searchMovieByName"}, method = {RequestMethod.POST})
     public ModelAndView searchmoviebyname(String movieName){
-        ModelAndView mav = new ModelAndView("addmovie");
+        ModelAndView mav = new ModelAndView("searchmovie");
         List<Movie> movies = movieService.listMovieByName(movieName);
         mav.addObject("movies",movies);
         return mav;
@@ -77,7 +108,7 @@ public class MovieController {
 
     @RequestMapping(value = {"/searchMovieByType"}, method = {RequestMethod.POST})
     public ModelAndView searchmoviebytype(String movieType){
-        ModelAndView mav = new ModelAndView();
+        ModelAndView mav = new ModelAndView("");
         List<Movie> movieList = movieService.listMovieByType(movieType);
         mav.addObject("movielist",movieList);
         return mav;
@@ -127,6 +158,14 @@ public class MovieController {
 
         mav.addObject("movie",movie);
         mav.addObject("comments",comments);
+        return mav;
+    }
+
+    @RequestMapping(value = {"/listAllMovie"}, method = {RequestMethod.GET})
+    public ModelAndView listallmovie(){
+        ModelAndView mav = new ModelAndView("managemovie");
+        List<Movie> movieList = movieService.listMovie();
+        mav.addObject("movieList",movieList);
         return mav;
     }
 }

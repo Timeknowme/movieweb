@@ -24,4 +24,6 @@ public interface NewsMapper {
     List<News> listNewsByTitle(@Param("newsTitle") String newsTitle);
 
     List<News> listNewsByRecommend();
+
+    List<News> listNews();
 }

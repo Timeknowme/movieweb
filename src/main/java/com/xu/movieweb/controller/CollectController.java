@@ -21,21 +21,23 @@ public class CollectController {
     private CollectService collectService;
 
     @RequestMapping(value = {"/viewCol"} , method = {RequestMethod.GET})
-    public ModelAndView viewCollect(Integer userid) {
-        ModelAndView mav = new ModelAndView("col");
-        List<Collect> collects = collectService.selectColByUserId(userid);
+    public ModelAndView viewCollect(Integer userId) {
+        ModelAndView mav = new ModelAndView("mycollect");
+        List<Collect> collects = collectService.selectColByUserId(userId);
+        System.out.println(collects.size());
         mav.addObject("collect",collects);
         //System.out.println(collects.get(0).getMovie().getMovieName());
         return mav;
     }
 
     @RequestMapping(value = {"/addCol"} , method = {RequestMethod.GET})
-    public String addCollect(Integer userId, Integer movieId){
+    public String addCollect(Integer userId, Integer movieId,RedirectAttributes attr){
         collectService.addCollect(userId, movieId);
-        return "111";
+        attr.addAttribute("movieId",movieId);
+        return "redirect:/movie/showMovie.html";
     }
 
-//    @RequestMapping(value = {"/deleteCol"} , method = {RequestMethod.GET})
+//    @RequestMapping(value = {"/deleteCollect"} , method = {RequestMethod.GET})
 //    public String deleteCollect(Integer userId, Integer movieId){
 //        collectService.deleteCollect(userId, movieId);
 //        return "111";
@@ -48,5 +50,12 @@ public class CollectController {
         int userId = user.getUserId();
         attr.addAttribute("userId",userId);
         return "redirect:/collect/viewCol.html";
+    }
+
+    @RequestMapping(value = {"/deleteColMovie"} , method = {RequestMethod.GET})
+    public String deleteCollectMovie(Integer movieId,Integer userId, HttpSession session, RedirectAttributes attr){
+        collectService.deleteCollect(userId,movieId);
+        attr.addAttribute("movieId",movieId);
+        return "redirect:/movie/showMovie.html";
     }
 }

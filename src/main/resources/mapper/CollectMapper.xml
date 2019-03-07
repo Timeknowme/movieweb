@@ -12,12 +12,9 @@
     <select id="selectColByUserId" resultMap="CollectMap">
         SELECT *
         FROM
-        collect c,
-        `user` u
+        collect c
         WHERE
-        c.col_user_id = u.user_id
-        AND
-        u.user_id = #{userId}
+        c.col_user_id = #{userId}
     </select>
     <select id="selectColByMovieId" resultMap="CollectMap">
         SELECT *
@@ -51,9 +48,9 @@
         FROM
         collect c
         WHERE
-        c.collect_user_id = #{userId}
+        c.col_user_id = #{userId}
         AND
-        c.collect_movie_id = #{movieId}
+        c.col_movie_id = #{movieId}
     </select>
     <delete id="delCollect">
         DELETE FROM collect

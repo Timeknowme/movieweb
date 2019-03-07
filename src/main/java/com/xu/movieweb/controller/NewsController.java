@@ -17,15 +17,21 @@ public class NewsController{
     @Resource
     NewsService newsService;
 
+    @RequestMapping(value = {"/addNews"}, method = {RequestMethod.GET})
+    public ModelAndView addnews(){
+        ModelAndView mav = new ModelAndView("addnews");
+        return mav;
+    }
+
     @RequestMapping(value = {"/addNews"}, method = {RequestMethod.POST})
     public String addnews(News news){
         newsService.addNews(news);
-        return null;
+        return "redirect:/news/listAllNews.html";
     }
 
     @RequestMapping(value = {"/updateNews"}, method = {RequestMethod.GET})
     public ModelAndView viewupdate(Integer newsId){
-        ModelAndView mav = new ModelAndView();
+        ModelAndView mav = new ModelAndView("editnews");
         News news = newsService.selectByNewsId(newsId);
         mav.addObject("news",news);
         return mav;
@@ -33,7 +39,7 @@ public class NewsController{
 
     @RequestMapping(value = {"/updateNews"}, method = {RequestMethod.POST})
     public ModelAndView updatenews(News news,Integer newsId){
-        ModelAndView mav = new ModelAndView();
+        ModelAndView mav = new ModelAndView("editnews");
         newsService.updateNews(news, newsId);
         News newNews = newsService.selectByNewsId(newsId);
         mav.addObject("news",newNews);
@@ -43,7 +49,7 @@ public class NewsController{
     @RequestMapping(value = {"/deleteNews"}, method = {RequestMethod.GET})
     public String deletenews(Integer newsId){
         newsService.deleteNews(newsId);
-        return null;
+        return "redirect:/news/listAllNews.html";
     }
 
     @RequestMapping(value = {"/searchNewsByName"}, method = {RequestMethod.POST})
@@ -57,13 +63,13 @@ public class NewsController{
     @RequestMapping(value = {"/setNewsRecommend"}, method = {RequestMethod.GET})
     public String setnewsrecommend(Integer newsId){
         newsService.setNewsRecommend(newsId);
-        return null;
+        return "redirect:/news/listAllNews.html";
     }
 
     @RequestMapping(value = {"/setNewsUnRecommend"}, method = {RequestMethod.GET})
     public String setnewsunrecommend(Integer newsId){
         newsService.setNewsUnRecommend(newsId);
-        return null;
+        return "redirect:/news/listAllNews.html";
     }
 
     @RequestMapping(value = {"/showNews"}, method = {RequestMethod.GET})
@@ -72,6 +78,14 @@ public class NewsController{
         News news = newsService.selectByNewsId(newsId);
         newsService.addNewsClick(newsId);
         mav.addObject("news",news);
+        return mav;
+    }
+
+    @RequestMapping(value = {"/listAllNews"}, method = {RequestMethod.GET})
+    public ModelAndView listallnews(){
+        ModelAndView mav = new ModelAndView("managenews");
+        List<News> newsList = newsService.listNews();
+        mav.addObject("newsList",newsList);
         return mav;
     }
 }

@@ -15,8 +15,8 @@ public class CommentServiceImpl implements CommentService {
     CommentMapper commentMapper;
 
     @Override
-    public void addComment(Integer userId, Integer movieId, String text) {
-        commentMapper.addComment(userId, movieId, text);
+    public void addComment(Integer userId, Integer movieId, String text, String time) {
+        commentMapper.addComment(userId, movieId, text, time);
     }
 
     @Override

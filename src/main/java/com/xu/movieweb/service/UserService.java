@@ -2,6 +2,8 @@ package com.xu.movieweb.service;
 
 import com.xu.movieweb.model.User;
 
+import java.util.List;
+
 public abstract interface UserService {
 
     void addUser(User user);
@@ -19,4 +21,8 @@ public abstract interface UserService {
     void updatePsdByUserId(Integer userId,String newPsd);
 
     void uploadHeadPic(Integer userId,String picAddress);
+
+    List<User> listUser();
+
+    void deleteUser(Integer userId);
 }

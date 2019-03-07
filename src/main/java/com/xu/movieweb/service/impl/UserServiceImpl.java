@@ -55,4 +55,14 @@ public class UserServiceImpl implements UserService {
     public void uploadHeadPic(Integer userId, String picAddress) {
         userMapper.uploadHeadPic(userId, picAddress);
     }
+
+    @Override
+    public List<User> listUser() {
+        return userMapper.listUser();
+    }
+
+    @Override
+    public void deleteUser(Integer userId) {
+        userMapper.deleteUser(userId);
+    }
 }

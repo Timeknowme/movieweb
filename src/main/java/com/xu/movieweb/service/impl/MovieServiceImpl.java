@@ -53,4 +53,9 @@ public class MovieServiceImpl implements MovieService {
     public void setMovieScore(Integer movieId, float movieScore) {
         movieMapper.setMovieScore(movieId, movieScore);
     }
+
+    @Override
+    public List<Movie> listMovie() {
+        return movieMapper.listMovie();
+    }
 }

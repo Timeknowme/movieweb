@@ -24,4 +24,8 @@ public abstract interface UserMapper{
 
     void uploadHeadPic(@Param("userId") Integer userId, @Param("picAddress") String picAddress);
 
+    List<User> listUser();
+
+    void deleteUser(@Param("userId") Integer userId);
+
 }
