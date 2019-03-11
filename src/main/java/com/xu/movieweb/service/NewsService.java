@@ -25,4 +25,8 @@ public interface NewsService {
     List<News> listNewsByRecommend();
 
     List<News> listNews();
+
+    void updateNewsno(Integer newsId);
+
+    void updateNewsyes(Integer newsId);
 }

@@ -1,48 +1,21 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
-    <title>Usermain</title>
+    <title>Single</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Movie_store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
     <link href="../css/bootstrap.css" rel='stylesheet' type='text/css' />
     <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- start plugins -->
-    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" src="../ueditor/ueditor.all.js"></script>
+    <script type="text/javascript" src="../js/jquery-3.3.1.min.js"></script>
     <link href='http://fonts.useso.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
 </head>
-<style type="text/css">
-    #xmTanImg{
-        width: 225px;
-        height: 225px;
-        margin: 20px;
-        float: left;
-    }
-    .file {
-        position: relative;
-        display: inline-block;
-        background-color: #EDEDED;
-        border: 1px solid #C8E0E0;
-        border-radius: 4px;
-        padding: 4px 12px;
-        overflow: hidden;
-        color: #767676;
-        text-decoration: none;
-        text-indent: 0;
-        line-height: 20px;
-    }
-    .file input {
-        position: absolute;
-        right: 0;
-        top: 0;
-        opacity: 0;
-    }
-</style>
 <body>
 <div class="container">
     <div class="container_wrap">
@@ -79,48 +52,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="clearfix"> </div>
         </div>
         <div class="content">
-            <div class="col-md-3">
-
-                <div style="text-align: center;margin-top: 10px;font-size: 20px;">
-                    <ul class="first">
-                        <li><a href="/user/listAllUser.html">管理用户</a></li>
-                        <li><a href="/movie/listAllMovie.html">管理电影</a></li>
-                        <li><a href="/news/listAllNews.html">管理新闻</a></li>
-                    </ul>
+            <div class="movie_top">
+                <div style="font-size: 30px;margin-bottom: 10px;">
+                    <span style="padding-left: 14px;">${news.newsTitle}</span>
                 </div>
-            </div>
-            <div class="col-md-8">
-                <div>
-                    <h1 style="font-size: 25px;">添加新闻</h1>
-                </div>
-                <form class="form-horizontal" style="text-align: center;margin-top: 20px;" enctype="multipart/form-data" action="/news/addNews.html" method="post">
-                    <div class="form-group">
-                        <label for="newsTitle" class="col-sm-2 control-label">新闻标题</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="newsTitle" id="newsTitle" placeholder="请输入新闻标题">
-                        </div>
+                <div class="col-md-9 movie_box">
+                    <div class="desc1 span_4_of_3">
+                        <p style="color: grey;">作者：${news.newsAuthor}<span></span>
+                            点击量：${news.newsClick}<span></span>
+                            发布时间：<fmt:formatDate value="${news.newsCreatetime}" pattern="yyyy年MM月dd日HH点mm分ss秒" /></p>
+                        <p style="font-size: 16px; margin-top: 25px;">${news.newsContent}</p>
                     </div>
-                    <div class="form-group">
-                        <label for="newsAuthor" class="col-sm-2 control-label">作者</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="newsAuthor" id="newsAuthor" placeholder="请输入作者">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="myEditor" class="col-sm-2 control-label">新闻内容</label>
-                        <div class="col-sm-10">
-                            <textarea name="newsContent" id="myEditor" style="width: 100%; height: 400px;">这里写你的初始化内容</textarea>
 
-                            <!-- 实例化编辑器 -->
-                            <script type="text/javascript">
-                                var ue = UE.getEditor('myEditor');
-                            </script>
-                        </div>
+                </div>
+                <div class="col-md-3">
+                    <p style="font-size: 25px;">当前推荐</p>
+                    <div class="movie_img"><div class="grid_2">
+                        <a href="/movie/showMovie.html?movieId=1"><img src="/jsp/img/movie1.jpg" class="img-responsive" alt="" style="width: 230px;height: 270px;"></a>
                     </div>
-                    <input type="submit" name="" value="提交" class="btn btn-primary" style="width: 100px;">
-                </form>
+                    </div>
+                    <div class="grid_2 col_1">
+                        <a href="/movie/showMovie.html?movieId=2"><img src="/jsp/img/movie2.jpg" class="img-responsive" alt="" style="width: 230px;height: 270px;"></a>
+                    </div>
+                    <div class="grid_2 col_1">
+                        <a href="/movie/showMovie.html?movieId=3"><img src="/jsp/img/movie3.jpg" class="img-responsive" alt="" style="width: 230px;height: 270px;"></a>
+                    </div>
+                </div>
+                <div class="clearfix"> </div>
             </div>
-            <div class="clearfix"></div>
         </div>
     </div>
 </div>
@@ -128,7 +87,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <footer id="footer">
         <div id="footer-3d">
             <div class="gp-container">
-                <span class="first-widget-bend"></span>
+                <span class="first-widget-bend"> </span>
             </div>
         </div>
         <div id="footer-widgets" class="gp-footer-larger-first-col">
@@ -175,3 +134,4 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </footer>
 </div>
 </body>
+</html>

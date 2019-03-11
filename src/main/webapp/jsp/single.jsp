@@ -9,10 +9,13 @@
     <meta name="keywords" content="Movie_store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/bootstrap-3.3.4.css">
     <link href="../css/bootstrap.css" rel='stylesheet' type='text/css' />
     <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="../css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
     <!-- start plugins -->
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="../js/star-rating.js" type="text/javascript"></script>
     <link href='http://fonts.useso.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -38,7 +41,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li><p><a href="/admin/adminLogin.html">管理员</a></p></li>
                     </c:if>
                     <c:if test="${sessionScope.user != null}">
-                        <li style="width:50%;"><a href="/user/usermain.html?userId=${sessionScope.user.userId}"><img src="${sessionScope.user.userHeadpic}" style="width:60%;border-radius:50%;float: left;"></a> </li>
+                        <li style="width:50%;"><a href="/user/usermain.html?userId=${sessionScope.user.userId}"><img src="${sessionScope.user.userHeadpic}" style="height: 50px;width: 60%;border-radius:50%;float: left;"></a> </li>
                         <li style="margin-top: 10px;"><p><a href="/user/exit.html">exit</a></p></li>
                     </c:if>
                     <c:if test="${sessionScope.admin != null}">
@@ -59,6 +62,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="grid images_3_of_2">
                         <div class="movie_image">
                             <img src="${movie.movieHeadpic}" class="img-responsive" alt=""/>
+                        </div>
+                        <div class="movie_rate">
+                            电影评分：${movie.movieFscore}
+                            <div class="clearfix"> </div>
                         </div>
                     </div>
                     <div class="desc1 span_3_of_2">
@@ -87,6 +94,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="clearfix"> </div>
                     <p class="m_4">剧情简介</p>
                     <p class="m_4">${movie.movieBrief}</p>
+                    <div style="width: 100%;">
+                        <p style="font-size: 20px;">电影剧照</p>
+                        <c:forEach var="moviepicList" items="${moviepicList}">
+                            <div style="width: 30%;height: 250px;float: left;margin-top: 10px;margin-left: 10px;">
+                                <img src="${moviepicList.mpicAddress}" style="width: 100%;height: 100%;">
+                            </div>
+                        </c:forEach>
+                        <div class="clearfix"> </div>
+                    </div>
+                    <form action="/score/addScore.html" method="post" style="margin-top: 10px;">
+                        <div class="to">
+                            <p>给这部电影评分</p>
+                        </div>
+                        注意，每个用户对每部电影仅能进行一次评分。
+                        <input id="input-21e" name="scoreNum" value="0" type="text" class="rating" data-min=0 data-max=10 data-step=1 data-size="xs"
+                               title="" data-show-caption="false">
+                        <input type="hidden" value="${sessionScope.user.userId}" name="userId">
+                        <input type="hidden" value="${movie.movieId}" name="movieId">
+                        <c:if test="${sessionScope.user != null}">
+                            <c:if test="${isScore == null}">
+                                <input name="submit" type="submit" value="评分" style="width: 100px;height: 30px;"><br>
+                            </c:if>
+                            <c:if test="${isScore != null}">
+                                您已经给该电影评过分，您的评分为${score.scoreNum}
+                            </c:if>
+                        </c:if>
+                        <c:if test="${sessionScope.user == null}">
+                            <input name="submit" type="button" value="评分" style="width: 100px;height: 30px;" onclick="window.location='/user/login.html'"><br>
+                        </c:if>
+                        <div class="clearfix"></div>
+                    </form>
                     <form action="/comment/addComment.html" method="post">
                         <div class="to">
                             <p>分享你的影评</p>
@@ -123,36 +161,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </div>
                 </div>
                 <div class="col-md-3">
+                    <p style="font-size: 25px;">当前推荐</p>
                     <div class="movie_img"><div class="grid_2">
-                        <img src="images/pic6.jpg" class="img-responsive" alt="">
-                        <div class="caption1">
-                            <ul class="list_5 list_7">
-                                <li><i class="icon5"> </i><p>3,548</p></li>
-                            </ul>
-                            <i class="icon4 icon6 icon7"> </i>
-                            <p class="m_3">Guardians of the Galaxy</p>
-                        </div>
+                        <a href="/movie/showMovie.html?movieId=1"><img src="/jsp/img/movie1.jpg" class="img-responsive" alt="" style="width: 230px;height: 270px;"></a>
                     </div>
                     </div>
                     <div class="grid_2 col_1">
-                        <img src="images/pic2.jpg" class="img-responsive" alt="">
-                        <div class="caption1">
-                            <ul class="list_3 list_7">
-                                <li><i class="icon5"> </i><p>3,548</p></li>
-                            </ul>
-                            <i class="icon4 icon7"> </i>
-                            <p class="m_3">Guardians of the Galaxy</p>
-                        </div>
+                        <a href="/movie/showMovie.html?movieId=2"><img src="/jsp/img/movie2.jpg" class="img-responsive" alt="" style="width: 230px;height: 270px;"></a>
                     </div>
                     <div class="grid_2 col_1">
-                        <img src="images/pic9.jpg" class="img-responsive" alt="">
-                        <div class="caption1">
-                            <ul class="list_3 list_7">
-                                <li><i class="icon5"> </i><p>3,548</p></li>
-                            </ul>
-                            <i class="icon4 icon7"> </i>
-                            <p class="m_3">Guardians of the Galaxy</p>
-                        </div>
+                        <a href="/movie/showMovie.html?movieId=3"><img src="/jsp/img/movie3.jpg" class="img-responsive" alt="" style="width: 230px;height: 270px;"></a>
                     </div>
                 </div>
                 <div class="clearfix"> </div>
@@ -201,9 +219,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="#">Twitter</a></li>
                             <li><a href="#">Youtube</a></li>
                         </ul>
-                        <div class="copy">
-                            <p>Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="#">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
-                        </div>
+
                     </div>
                     <div class="clearfix"> </div>
                 </div>

@@ -36,7 +36,7 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     public void addNewsClick(Integer newsId) {
-        newsMapper.addNewsCilck(newsId);
+        newsMapper.addNewsClick(newsId);
     }
 
     @Override
@@ -62,5 +62,15 @@ public class NewsServiceImpl implements NewsService {
     @Override
     public List<News> listNews() {
         return newsMapper.listNews();
+    }
+
+    @Override
+    public void updateNewsno(Integer newsId) {
+        newsMapper.updateNewsno(newsId);
+    }
+
+    @Override
+    public void updateNewsyes(Integer newsId) {
+        newsMapper.updateNewsyes(newsId);
     }
 }

@@ -14,7 +14,7 @@
         <result column="movie_time" property="movieTime" jdbcType="VARCHAR"/>
         <result column="movie_brief" property="movieBrief" jdbcType="VARCHAR"/>
         <result column="movie_headpic" property="movieHeadpic" jdbcType="VARCHAR"/>
-        <result column="movie_fscore" property="movieFscore" jdbcType="FLOAT"/>
+        <result column="movie_fscore" property="movieFscore" jdbcType="VARCHAR"/>
         <result column="movie_updatetime" property="movieUpdatetime" jdbcType="TIMESTAMP"/>
         <collection property="collects" ofType="Collect" select="com.xu.movieweb.dao.CollectMapper.selectColByMovieId" column="movie_id">
         </collection>
@@ -80,7 +80,7 @@
         movie_id = #{movieId}
     </delete>
     <select id="listMovieByName" resultMap="MovieMap" parameterType="java.lang.String">
-        SELECT movie_name
+        SELECT *
         FROM
         movie
         WHERE

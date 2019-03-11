@@ -22,7 +22,7 @@
         INSERT INTO news(
             news_title,
             news_author,
-            news_conent,
+            news_content,
             news_isrecommend,
             news_status,
             news_createtime
@@ -45,9 +45,7 @@
         news_id = #{newsId}
     </update>
     <update id="deleteNews">
-        UPDATE news
-        SET
-        news_status = 0
+        DELETE FROM news
         WHERE
         news_id = #{newsId}
     </update>
@@ -95,4 +93,18 @@
         FROM
         news
     </select>
+    <update id="updateNewsno">
+        UPDATE news
+        SET
+        news_status = 0
+        WHERE
+        news_id = #{newsId}
+    </update>
+    <update id="updateNewsyes">
+        UPDATE news
+        SET
+        news_status = 1
+        WHERE
+        news_id = #{newsId}
+    </update>
 </mapper>

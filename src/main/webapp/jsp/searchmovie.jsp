@@ -37,7 +37,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li><p><a href="/admin/adminLogin.html">管理员</a></p></li>
                     </c:if>
                     <c:if test="${sessionScope.user != null}">
-                        <li style="width:50%;"><a href="/user/usermain.html?userId=${sessionScope.user.userId}"><img src="${sessionScope.user.userHeadpic}" style="width:60%;border-radius:50%;float: left;"></a> </li>
+                        <li style="width:50%;"><a href="/user/usermain.html?userId=${sessionScope.user.userId}"><img src="${sessionScope.user.userHeadpic}" style="height: 50px;width: 60%;border-radius:50%;float: left;"></a> </li>
                         <li style="margin-top: 10px;"><p><a href="/user/exit.html">exit</a></p></li>
                     </c:if>
                     <c:if test="${sessionScope.admin != null}">
@@ -64,7 +64,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <img src="${movies.movieHeadpic}" style="width:100%;">
                         </div>
                         <div class="col-md-8">
-                            <a href=""><p style="font-size: 18px;">${movies.movieName}</p></a>
+                            <a href="/movie/showMovie.html?movieId=${movies.movieId}"><p style="font-size: 18px;">${movies.movieName}</p></a>
                             <div style="margin-top:10px;"><p style="font-size: 12px;">评分：${movies.movieFscore}</p></div>
                             <div style="margin-top:10px;"><p style="font-size: 13px;color: #A9A9A9">${movies.movieLocation}/${movies.movieType}/${movies.movieDate}</p></div>
                             <div style="margin-top:10px;"><p style="font-size: 13px;color: #A9A9A9">${movies.movieActor}</p></div>
@@ -75,25 +75,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="clearfix"></div>
                 </div>
                 <div class="col-md-3">
-                    <div class="grid_2 col_1">
-                        <img src="images/pic2.jpg" class="img-responsive" alt="">
-                        <div class="caption1">
-                            <ul class="list_3 list_7">
-                                <li><i class="icon5"> </i><p>3,548</p></li>
-                            </ul>
-                            <i class="icon4 icon7"> </i>
-                            <p class="m_3">Guardians of the Galaxy</p>
-                        </div>
+                    <p style="font-size: 25px;">当前推荐</p>
+                    <div class="movie_img"><div class="grid_2">
+                        <a href="/movie/showMovie.html?movieId=1"><img src="/jsp/img/movie1.jpg" class="img-responsive" alt="" style="width: 230px;height: 270px;"></a>
+                    </div>
                     </div>
                     <div class="grid_2 col_1">
-                        <img src="images/pic9.jpg" class="img-responsive" alt="">
-                        <div class="caption1">
-                            <ul class="list_3 list_7">
-                                <li><i class="icon5"> </i><p>3,548</p></li>
-                            </ul>
-                            <i class="icon4 icon7"> </i>
-                            <p class="m_3">Guardians of the Galaxy</p>
-                        </div>
+                        <a href="/movie/showMovie.html?movieId=2"><img src="/jsp/img/movie2.jpg" class="img-responsive" alt="" style="width: 230px;height: 270px;"></a>
+                    </div>
+                    <div class="grid_2 col_1">
+                        <a href="/movie/showMovie.html?movieId=3"><img src="/jsp/img/movie3.jpg" class="img-responsive" alt="" style="width: 230px;height: 270px;"></a>
                     </div>
                 </div>
                 <div class="clearfix"></div>
@@ -143,9 +134,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="#">Twitter</a></li>
                             <li><a href="#">Youtube</a></li>
                         </ul>
-                        <div class="copy">
-                            <p>Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="#">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
-                        </div>
+
                     </div>
                     <div class="clearfix"> </div>
                 </div>

@@ -26,16 +26,18 @@ public class ScoreController {
 
     @RequestMapping(value = {"/addScore"} , method = {RequestMethod.POST})
     public String addscore(Integer userId, Integer movieId, Integer scoreNum, RedirectAttributes attr){
-        int total = 0;
-        int fscore = 0;
+        float total = 0;
+        float fscore = 0;
         scoreService.addScore(userId, movieId, scoreNum);
         List<Score> scores = scoreService.selectScoByMovieId(movieId);
         Integer scoreCount = scoreService.listScoByMovieIdCount(movieId);
+        float count = scoreCount;
         for (int i = 0; i < scores.size(); i++){
             total += scores.get(i).getScoreNum();
         }
-        fscore = total / scoreCount;
-        movieService.setMovieScore(movieId,fscore);
+        fscore = total / count;
+        float b = (float)(Math.round(fscore*10))/(10);
+        movieService.setMovieScore(movieId,b);
         attr.addAttribute("movieId",movieId);
         return "redirect:/movie/showMovie.html";
     }

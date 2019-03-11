@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -25,6 +28,11 @@ public class NewsController{
 
     @RequestMapping(value = {"/addNews"}, method = {RequestMethod.POST})
     public String addnews(News news){
+        Date date = new Date();
+        String datetime = null;
+        DateFormat dFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        datetime = dFormat.format(date);
+        news.setNewsCreatetime(date);
         newsService.addNews(news);
         return "redirect:/news/listAllNews.html";
     }
@@ -56,7 +64,7 @@ public class NewsController{
     public ModelAndView searchnewsbyname(String newsTitle){
         ModelAndView mav = new ModelAndView();
         List<News> newsList = newsService.listNewsByTitle(newsTitle);
-        mav.addObject("newslist",newsList);
+        mav.addObject("newsList",newsList);
         return mav;
     }
 
@@ -74,7 +82,7 @@ public class NewsController{
 
     @RequestMapping(value = {"/showNews"}, method = {RequestMethod.GET})
     public ModelAndView shownews(Integer newsId){
-        ModelAndView mav = new ModelAndView();
+        ModelAndView mav = new ModelAndView("singlenews");
         News news = newsService.selectByNewsId(newsId);
         newsService.addNewsClick(newsId);
         mav.addObject("news",news);
@@ -87,5 +95,17 @@ public class NewsController{
         List<News> newsList = newsService.listNews();
         mav.addObject("newsList",newsList);
         return mav;
+    }
+
+    @RequestMapping(value = {"/updateNewsno"}, method = {RequestMethod.GET})
+    public String updatenewsno(Integer newsId){
+        newsService.updateNewsno(newsId);
+        return "redirect:/news/listAllNews.html";
+    }
+
+    @RequestMapping(value = {"/updateNewsyes"}, method = {RequestMethod.GET})
+    public String updatenewsyes(Integer newsId){
+        newsService.updateNewsyes(newsId);
+        return "redirect:/news/listAllNews.html";
     }
 }

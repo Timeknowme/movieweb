@@ -49,7 +49,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <li><p><a href="/admin/adminLogin.html">管理员</a></p></li>
                     </c:if>
                     <c:if test="${sessionScope.user != null}">
-                        <li style="width:50%;"><a href="/user/usermain.html?userId=${sessionScope.user.userId}"><img src="${sessionScope.user.userHeadpic}" style="width:60%;border-radius:50%;float: left;"></a> </li>
+                        <li style="width:50%;"><a href="/user/usermain.html?userId=${sessionScope.user.userId}"><img src="${sessionScope.user.userHeadpic}" style="height: 50px;width: 60%;border-radius:50%;float: left;"></a> </li>
                         <li style="margin-top: 10px;"><p><a href="/user/exit.html">exit</a></p></li>
                     </c:if>
                     <c:if test="${sessionScope.admin != null}">
@@ -87,7 +87,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <h1 class="m_2">Featurd Movies</h1>
                 <div class="search">
                     <form action="/movie/searchMovieByName.html" method="post">
-                        <input type="text" value="Search..." onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
+                        <input type="text" name="movieName" value="Search..." onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
                         <input type="submit" value="">
                     </form>
                 </div>
@@ -108,23 +108,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <HR style="FILTER: alpha(opacity=100,finishopacity=0,style=3)" width="100%" color=#987cb9 SIZE=3>
             <div class="box_1">
                 <h1 class="m_2">NEWS</h1>
-                <div class="search">
-                    <form action="/news/searchNewsByName.html" method="post">
-                        <input type="text" value="Search..." onfocus="this.value='';" onblur="if (this.value == '') {this.value ='';}">
-                        <input type="submit" value="">
-                    </form>
-                </div>
+
                 <div class="clearfix"> </div>
             </div>
-            <div class="box_2" style="font-size: 20px;width: 80%;margin: 0 auto;">
-                <div><a href="">中国人民的老朋友</a></div>
-                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
-                <div><a href="">aaaaaaaaaaaaaaaaaaaaaaaaa</a></div>
-                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
-                <div><a href="">aaaaaaaaaaaaaaaaaaaaaaaaa</a></div>
-                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
-                <div><a href="">aaaaaaaaaaaaaaaaaaaaaaaaa</a></div>
-                <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
+            <div class="box_2" style="font-size: 18px;width: 80%;margin: 0 auto;">
+                <c:forEach var="news" items="${news}">
+                    <div><a href="/news/showNews.html?newsId=${news.newsId}">${news.newsTitle}</a><p style="float:right; font-size: 16px;">By:${news.newsAuthor}</p></div>
+                    <div style="height:2px;width:100%;border-top:1px solid #ccc;float:left;margin-bottom:10px;"></div>
+                </c:forEach>
             </div>
         </div>
     </div>
@@ -171,9 +162,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="#">Twitter</a></li>
                             <li><a href="#">Youtube</a></li>
                         </ul>
-                        <div class="copy">
-                            <p>Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="#">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
-                        </div>
+
                     </div>
                     <div class="clearfix"> </div>
                 </div>

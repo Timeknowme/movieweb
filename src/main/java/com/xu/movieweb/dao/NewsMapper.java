@@ -15,7 +15,7 @@ public interface NewsMapper {
 
     void deleteNews(@Param("newsId") Integer newsId);
 
-    void addNewsCilck(@Param("newsId") Integer newsId);
+    void addNewsClick(@Param("newsId") Integer newsId);
 
     void setNewsRecommend(@Param("newsId") Integer newsId);
 
@@ -26,4 +26,8 @@ public interface NewsMapper {
     List<News> listNewsByRecommend();
 
     List<News> listNews();
+
+    void updateNewsno(@Param("newsId") Integer newsId);
+
+    void updateNewsyes(@Param("newsId") Integer newsId);
 }

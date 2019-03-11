@@ -1,8 +1,8 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
-    <title>Usermain</title>
+    <title>Movie</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="Movie_store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
@@ -12,37 +12,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
     <!-- start plugins -->
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" src="../ueditor/ueditor.all.js"></script>
     <link href='http://fonts.useso.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
 </head>
-<style type="text/css">
-    #xmTanImg{
-        width: 225px;
-        height: 225px;
-        margin: 20px;
-        float: left;
-    }
-    .file {
-        position: relative;
-        display: inline-block;
-        background-color: #EDEDED;
-        border: 1px solid #C8E0E0;
-        border-radius: 4px;
-        padding: 4px 12px;
-        overflow: hidden;
-        color: #767676;
-        text-decoration: none;
-        text-indent: 0;
-        line-height: 20px;
-    }
-    .file input {
-        position: absolute;
-        right: 0;
-        top: 0;
-        opacity: 0;
-    }
-</style>
 <body>
 <div class="container">
     <div class="container_wrap">
@@ -79,48 +50,49 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="clearfix"> </div>
         </div>
         <div class="content">
-            <div class="col-md-3">
+            <h2 class="m_3">${movieType}</h2>
+                <div class="movie_top">
+                    <div class="col-md-9 movie_box">
+                        <!-- Movie variant with time -->
+                        <c:forEach var="movieList" items="${movieList}">
+                        <div class="movie movie-test movie-test-dark movie-test-left">
+                            <div class="movie__images">
+                                <a href="/movie/showMovie.html?movieId=${movieList.movieId}" class="movie-beta__link">
+                                    <img src="${movieList.movieHeadpic}" class="img-responsive" alt="" style="width: 200px;height: 250px;"/>
+                                </a>
+                            </div>
+                            <div class="movie__info">
+                                <a href="/movie/showMovie.html?movieId=${movieList.movieId}" class="movie__title" style="font-size: 22px;">${movieList.movieName}  </a>
+                                <p class="movie__time" style="margin-top: 10px;">时长：${movieList.movieTime}</p>
+                                <p class="movie__option" style="margin-top: 10px;">导演：${movieList.movieDirector}</p>
+                                <ul class="list_6" style="margin-top: 10px;">
+                                    <li><p>${movieList.movieLocation}</p></li>
+                                    <li>评分 : &nbsp;&nbsp;<p>${movieList.movieFscore}</p></li>
+                                    <div class="clearfix"> </div>
+                                </ul>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                        </c:forEach>
 
-                <div style="text-align: center;margin-top: 10px;font-size: 20px;">
-                    <ul class="first">
-                        <li><a href="/user/listAllUser.html">管理用户</a></li>
-                        <li><a href="/movie/listAllMovie.html">管理电影</a></li>
-                        <li><a href="/news/listAllNews.html">管理新闻</a></li>
-                    </ul>
+                        <div class="clearfix"> </div>
+                        <!-- Movie variant with time -->
+                    </div>
+                    <div class="col-md-3">
+                        <p style="font-size: 25px;">当前推荐</p>
+                        <div class="movie_img"><div class="grid_2">
+                            <a href="/movie/showMovie.html?movieId=1"><img src="/jsp/img/movie1.jpg" class="img-responsive" alt="" style="width: 230px;height: 270px;"></a>
+                        </div>
+                        </div>
+                        <div class="grid_2 col_1">
+                            <a href="/movie/showMovie.html?movieId=2"><img src="/jsp/img/movie2.jpg" class="img-responsive" alt="" style="width: 230px;height: 270px;"></a>
+                        </div>
+                        <div class="grid_2 col_1">
+                            <a href="/movie/showMovie.html?movieId=3"><img src="/jsp/img/movie3.jpg" class="img-responsive" alt="" style="width: 230px;height: 270px;"></a>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
                 </div>
-            </div>
-            <div class="col-md-8">
-                <div>
-                    <h1 style="font-size: 25px;">添加新闻</h1>
-                </div>
-                <form class="form-horizontal" style="text-align: center;margin-top: 20px;" enctype="multipart/form-data" action="/news/addNews.html" method="post">
-                    <div class="form-group">
-                        <label for="newsTitle" class="col-sm-2 control-label">新闻标题</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="newsTitle" id="newsTitle" placeholder="请输入新闻标题">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="newsAuthor" class="col-sm-2 control-label">作者</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="newsAuthor" id="newsAuthor" placeholder="请输入作者">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="myEditor" class="col-sm-2 control-label">新闻内容</label>
-                        <div class="col-sm-10">
-                            <textarea name="newsContent" id="myEditor" style="width: 100%; height: 400px;">这里写你的初始化内容</textarea>
-
-                            <!-- 实例化编辑器 -->
-                            <script type="text/javascript">
-                                var ue = UE.getEditor('myEditor');
-                            </script>
-                        </div>
-                    </div>
-                    <input type="submit" name="" value="提交" class="btn btn-primary" style="width: 100px;">
-                </form>
-            </div>
-            <div class="clearfix"></div>
         </div>
     </div>
 </div>
@@ -175,3 +147,4 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </footer>
 </div>
 </body>
+</html>

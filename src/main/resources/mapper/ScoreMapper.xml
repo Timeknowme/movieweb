@@ -61,4 +61,13 @@
         AND
         s.score_movie_id = #{movieId}
     </select>
+    <select id="searchScore" resultMap="ScoreMap">
+        SELECT *
+        FROM
+        score
+        WHERE
+        score_user_id = #{userId}
+        AND
+        score_movie_id = #{movieId}
+    </select>
 </mapper>

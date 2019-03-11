@@ -40,7 +40,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li><p><a href="/admin/adminLogin.html">管理员</a></p></li>
                     </c:if>
                     <c:if test="${sessionScope.user != null}">
-                        <li style="width:50%;"><a href="/user/usermain.html?userId=${sessionScope.user.userId}"><img src="${sessionScope.user.userHeadpic}" style="width:60%;border-radius:50%;float: left;"></a> </li>
+                        <li style="width:50%;"><a href="/user/usermain.html?userId=${sessionScope.user.userId}"><img src="${sessionScope.user.userHeadpic}" style="height: 50px;width: 60%;border-radius:50%;float: left;"></a> </li>
                         <li style="margin-top: 10px;"><p><a href="/user/exit.html">exit</a></p></li>
                     </c:if>
                     <c:if test="${sessionScope.admin != null}">
@@ -54,9 +54,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="content">
             <div class="col-md-3">
-                <div style="width:150px; border-radius:50%; overflow:hidden;text-align: center;margin-left: 20%;">
-                    <img src="images/1.jpg" style="width: 100%;">
-                </div>
+
                 <div style="text-align: center;margin-top: 10px;font-size: 20px;">
                     <ul class="first">
                         <li><a href="/user/listAllUser.html">管理用户</a></li>
@@ -134,9 +132,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="#">Twitter</a></li>
                             <li><a href="#">Youtube</a></li>
                         </ul>
-                        <div class="copy">
-                            <p>Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="#">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
-                        </div>
+
                     </div>
                     <div class="clearfix"> </div>
                 </div>

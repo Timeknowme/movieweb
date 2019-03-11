@@ -10,10 +10,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
     <link href="../css/bootstrap.css" rel='stylesheet' type='text/css' />
     <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="../css/bootstrap-table.css">
     <!-- start plugins -->
     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" src="../ueditor/ueditor.all.js"></script>
+    <script src="../js/bootstrap-table.js"></script>
+    <script src="../js/bootstrap-table-zh-CN.js"></script>
     <link href='http://fonts.useso.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
 </head>
 <style type="text/css">
@@ -89,36 +90,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </ul>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div>
-                    <h1 style="font-size: 25px;">添加新闻</h1>
+                    <h1 style="font-size: 25px;">上传${movie.movieName}电影照片</h1>
+                    <form action="/moviepic/addPics.html" method="POST" enctype="multipart/form-data">
+                        <a href="" class="file">从计算机中选择一张照片<input type="file" value="从计算机中选择一张照片" name="moviepic" onchange="xmTanUploadImg(this)" accept="image/*"/></a>
+                        <input type="hidden" name="movieId" value="${movie.movieId}">
+                        <br>
+                        <input type="submit" class="file" style="cursor: pointer;" value="上传">
+                    </form>
                 </div>
-                <form class="form-horizontal" style="text-align: center;margin-top: 20px;" enctype="multipart/form-data" action="/news/addNews.html" method="post">
-                    <div class="form-group">
-                        <label for="newsTitle" class="col-sm-2 control-label">新闻标题</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="newsTitle" id="newsTitle" placeholder="请输入新闻标题">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="newsAuthor" class="col-sm-2 control-label">作者</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="newsAuthor" id="newsAuthor" placeholder="请输入作者">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="myEditor" class="col-sm-2 control-label">新闻内容</label>
-                        <div class="col-sm-10">
-                            <textarea name="newsContent" id="myEditor" style="width: 100%; height: 400px;">这里写你的初始化内容</textarea>
-
-                            <!-- 实例化编辑器 -->
-                            <script type="text/javascript">
-                                var ue = UE.getEditor('myEditor');
-                            </script>
-                        </div>
-                    </div>
-                    <input type="submit" name="" value="提交" class="btn btn-primary" style="width: 100px;">
-                </form>
+                <c:forEach var="moviepicList" items="${moviepicList}">
+                <div style="width: 30%;height: 300px;float: left;margin-top: 10px;">
+                    <img src="${moviepicList.mpicAddress}" style="width: 100%; height: 100%;">
+                </div>
+                </c:forEach>
             </div>
             <div class="clearfix"></div>
         </div>

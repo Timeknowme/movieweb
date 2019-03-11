@@ -36,6 +36,9 @@ public class MovieController {
     @Resource
     NewsService newsService;
 
+    @Resource
+    MoviepicService moviepicService;
+
     @RequestMapping(value = {"/addMovie"}, method = {RequestMethod.GET})
     public ModelAndView addmovie(){
         ModelAndView mav = new ModelAndView("addmovie");
@@ -106,11 +109,21 @@ public class MovieController {
         return mav;
     }
 
+    @RequestMapping(value = {"/searchMovieByType"}, method = {RequestMethod.GET})
+    public ModelAndView searchmoviebyType(String movieType){
+        ModelAndView mav = new ModelAndView("movietype");
+        List<Movie> movieList = movieService.listMovieByType(movieType);
+        mav.addObject("movieList",movieList);
+        mav.addObject("movieType",movieType);
+        return mav;
+    }
+
     @RequestMapping(value = {"/searchMovieByType"}, method = {RequestMethod.POST})
     public ModelAndView searchmoviebytype(String movieType){
-        ModelAndView mav = new ModelAndView("");
+        ModelAndView mav = new ModelAndView("movietype");
         List<Movie> movieList = movieService.listMovieByType(movieType);
-        mav.addObject("movielist",movieList);
+        mav.addObject("movieList",movieList);
+        mav.addObject("movieType",movieType);
         return mav;
     }
 
@@ -145,6 +158,8 @@ public class MovieController {
             } else {
                 session.removeAttribute("isScore");
             }
+            Score score = scoreService.searchScore(userId, movieId);
+            mav.addObject("score",score);
         }
         Movie movie = movieService.selectByMovieId(movieId);
         List<Comment> comments = commentService.selectComByMovieId(movieId);
@@ -155,9 +170,10 @@ public class MovieController {
 //        }
 //        finalscore = total / scoreCount;
         //判断用户是否已经收藏电影
-
+        List<Moviepic> moviepicList = moviepicService.selectPicsByMovieId(movieId);
         mav.addObject("movie",movie);
         mav.addObject("comments",comments);
+        mav.addObject("moviepicList",moviepicList);
         return mav;
     }
 

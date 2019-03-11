@@ -40,7 +40,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <li><p><a href="/admin/adminLogin.html">管理员</a></p></li>
                     </c:if>
                     <c:if test="${sessionScope.user != null}">
-                        <li style="width:50%;"><a href="/user/usermain.html?userId=${sessionScope.user.userId}"><img src="${sessionScope.user.userHeadpic}" style="width:60%;border-radius:50%;float: left;"></a> </li>
+                        <li style="width:50%;"><a href="/user/usermain.html?userId=${sessionScope.user.userId}"><img src="${sessionScope.user.userHeadpic}" style="height: 50px;width: 60%;border-radius:50%;float: left;"></a> </li>
                         <li style="margin-top: 10px;"><p><a href="/user/exit.html">exit</a></p></li>
                     </c:if>
                     <c:if test="${sessionScope.admin != null}">
@@ -66,7 +66,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="col-md-8">
                 <div>
                     <h1 style="font-size: 25px;">管理新闻</h1>
-                    <button type="button" class="btn btn-primary" onclick="window.location='/movie/addNews.html'">添加新闻 </button>
+                    <button type="button" class="btn btn-primary" onclick="window.location='/news/addNews.html'">添加新闻 </button>
                 </div>
                 <table data-toggle="table" style="text-align: center;margin-top: 10px;">
                     <thead>
@@ -81,7 +81,22 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <tr>
                             <td>${newsList.newsId}</td>
                             <td>${newsList.newsTitle}</td>
-                            <td><a href="">推荐</a>|<a href="/news/updateNews.html?newsId=${newsList.newsId}">修改</a>|<a href="/news/deleteNews.html?newsId=${newsList.newsId}">删除</a></td>
+                            <td>
+                                <c:if test="${newsList.newsIsRecommend == 0}">
+                                    <a href="/news/setNewsRecommend.html?newsId=${newsList.newsId}">推荐</a>|
+                                </c:if>
+                                <c:if test="${newsList.newsIsRecommend == 1}">
+                                    <a href="/news/setNewsUnRecommend.html?newsId=${newsList.newsId}">取消推荐</a>|
+                                </c:if>
+                                <a href="/news/updateNews.html?newsId=${newsList.newsId}">修改</a>|
+                                <a href="/news/deleteNews.html?newsId=${newsList.newsId}">删除</a>|
+                                <c:if test="${newsList.newsStatus == 1}">
+                                    <a href="/news/updateNewsno.html?newsId=${newsList.newsId}">不显示</a>
+                                </c:if>
+                                <c:if test="${newsList.newsStatus == 0}">
+                                    <a href="/news/updateNewsyes.html?newsId=${newsList.newsId}">显示</a>
+                                </c:if>
+                            </td>
                         </tr>
                         </c:forEach>
                     </tbody>
@@ -132,9 +147,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             <li><a href="#">Twitter</a></li>
                             <li><a href="#">Youtube</a></li>
                         </ul>
-                        <div class="copy">
-                            <p>Copyright &copy; 2015.Company name All rights reserved.<a target="_blank" href="#">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
-                        </div>
+
                     </div>
                     <div class="clearfix"> </div>
                 </div>

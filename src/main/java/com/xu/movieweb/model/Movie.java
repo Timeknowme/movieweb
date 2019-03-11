@@ -16,18 +16,18 @@ public class Movie {
     private String movieTime;
     private String movieBrief;
     private String movieHeadpic;
-    private float movieFscore;
+    private String movieFscore;
     private Date movieUpdatetime;
     private List<Collect> collects;
     private List<Comment> comments;
     private List<Score> scores;
     private List<Moviepic> moviepics;
 
-    public float getMovieFscore() {
+    public String getMovieFscore() {
         return movieFscore;
     }
 
-    public void setMovieFscore(float movieFscore) {
+    public void setMovieFscore(String movieFscore) {
         this.movieFscore = movieFscore;
     }
 
