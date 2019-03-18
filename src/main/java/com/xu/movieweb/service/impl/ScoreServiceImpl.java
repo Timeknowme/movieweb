@@ -15,8 +15,8 @@ public class ScoreServiceImpl implements ScoreService {
     ScoreMapper scoreMapper;
 
     @Override
-    public void addScore(Integer userId, Integer movieId, Integer scoreNum) {
-        scoreMapper.addScore(userId,movieId,scoreNum);
+    public void addScore(Integer userId, Integer movieId, Integer scoreNum, String ip) {
+        scoreMapper.addScore(userId,movieId,scoreNum,ip);
     }
 
     @Override
@@ -42,5 +42,10 @@ public class ScoreServiceImpl implements ScoreService {
     @Override
     public Score searchScore(Integer userId, Integer movieId) {
         return scoreMapper.searchScore(userId, movieId);
+    }
+
+    @Override
+    public Integer isScoredByIp(Integer movieId, String ip) {
+        return scoreMapper.isScoredByIp(movieId, ip);
     }
 }

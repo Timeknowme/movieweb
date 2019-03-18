@@ -30,10 +30,18 @@
     <insert id="addUser">
         INSERT INTO `user`(
             user_name,
-            user_psd )
+            user_psd,
+            user_realname,
+            user_sex,
+            user_qq,
+            user_headpic)
         VALUES (
             #{user.userName,jdbcType=VARCHAR},
-            #{user.userPsd,jdbcType=VARCHAR}
+            #{user.userPsd,jdbcType=VARCHAR},
+            #{user.userRealname,jdbcType=VARCHAR},
+            #{user.userSex,jdbcType=VARCHAR},
+            #{user.userQQ,jdbcType=VARCHAR},
+            #{user.userHeadpic,jdbcType=VARCHAR}
         )
     </insert>
     <select id="selectUserByName" resultMap="UserMap" parameterType="java.lang.String">

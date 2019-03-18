@@ -11,7 +11,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<link href="../css/bootstrap.css" rel='stylesheet' type='text/css' />
 	<link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- start plugins -->
-	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
 	<link href='http://fonts.useso.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
 </head>
 <body>
@@ -67,6 +67,28 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div>
 							<span>确认密码<label>*</label></span>
 							<input type="password" id="check" onblur="checkpass2()">
+						</div>
+						<div style="height: 61px;"></div>
+						<div>
+							<span>真实姓名</span>
+							<input type="text" name="userRealname">
+						</div>
+						<div style="height: 61px;"></div>
+						<div>
+							<span>性别</span>
+
+								<label class="radio-inline">
+									<input type="radio" name="userSex" value="男"> 男
+								</label>
+								<label class="radio-inline">
+									<input type="radio" name="userSex"  value="女"> 女
+								</label>
+
+						</div>
+						<div style="height: 61px;"></div>
+						<div>
+							<span>QQ</span>
+							<input type="text" name="userQQ">
 						</div>
 						<div style="height: 61px;"></div>
 						<div>

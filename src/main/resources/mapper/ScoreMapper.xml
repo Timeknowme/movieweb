@@ -33,11 +33,13 @@
         INSERT INTO score(
             score_user_id,
             score_movie_id,
-            score_num
+            score_num,
+            score_ip
         ) VALUES (
             #{userId},
             #{movieId},
-            #{scoreNum}
+            #{scoreNum},
+            #{ip}
         )
     </insert>
     <select id="listScoByMovieIdCount" resultType="java.lang.Integer">
@@ -69,5 +71,15 @@
         score_user_id = #{userId}
         AND
         score_movie_id = #{movieId}
+    </select>
+    <select id="isScoredByIp" resultType="java.lang.Integer">
+        SELECT
+        COUNT(1)
+        FROM
+        score s
+        WHERE
+        s.score_movie_id = #{movieId}
+        AND
+        s.score_ip = #{ip}
     </select>
 </mapper>

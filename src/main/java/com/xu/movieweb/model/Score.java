@@ -3,8 +3,17 @@ package com.xu.movieweb.model;
 public class Score {
     private Integer scoreId;
     private Integer scoreNum;
+    private String scoreIp;
     private User user;
     private Movie movie;
+
+    public String getScoreIp() {
+        return scoreIp;
+    }
+
+    public void setScoreIp(String scoreIp) {
+        this.scoreIp = scoreIp;
+    }
 
     public Integer getScoreId() {
         return scoreId;

@@ -6,7 +6,7 @@ import java.util.List;
 
 public abstract interface ScoreService {
 
-    void addScore(Integer userId, Integer movieId, Integer scoreNum);
+    void addScore(Integer userId, Integer movieId, Integer scoreNum, String ip);
 
     List<Score> selectScoByMovieId(Integer movieId);
 
@@ -17,4 +17,6 @@ public abstract interface ScoreService {
     List<Score> selectScoByUserId(Integer userId);
 
     Score searchScore(Integer userId, Integer movieId);
+
+    Integer isScoredByIp(Integer movieId, String ip);
 }

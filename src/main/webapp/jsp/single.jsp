@@ -14,7 +14,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
     <link href="../css/star-rating.css" media="all" rel="stylesheet" type="text/css"/>
     <!-- start plugins -->
-    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
     <script src="../js/star-rating.js" type="text/javascript"></script>
     <link href='http://fonts.useso.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>
 </head>
@@ -113,11 +113,16 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <input type="hidden" value="${sessionScope.user.userId}" name="userId">
                         <input type="hidden" value="${movie.movieId}" name="movieId">
                         <c:if test="${sessionScope.user != null}">
-                            <c:if test="${isScore == null}">
-                                <input name="submit" type="submit" value="评分" style="width: 100px;height: 30px;"><br>
+                            <c:if test="${isScoredByIp == null}">
+                                <c:if test="${isScore == null}">
+                                    <input name="submit" type="submit" value="评分" style="width: 100px;height: 30px;"><br>
+                                </c:if>
+                                <c:if test="${isScore != null}">
+                                    您已经给该电影评过分，您的评分为${score.scoreNum}
+                                </c:if>
                             </c:if>
-                            <c:if test="${isScore != null}">
-                                您已经给该电影评过分，您的评分为${score.scoreNum}
+                            <c:if test="${isScoredByIp != null}">
+                                该IP已经为该电影评过分。
                             </c:if>
                         </c:if>
                         <c:if test="${sessionScope.user == null}">

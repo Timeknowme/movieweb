@@ -25,10 +25,11 @@ public class ScoreController {
     MovieService movieService;
 
     @RequestMapping(value = {"/addScore"} , method = {RequestMethod.POST})
-    public String addscore(Integer userId, Integer movieId, Integer scoreNum, RedirectAttributes attr){
+    public String addscore(Integer userId, Integer movieId, Integer scoreNum, HttpSession session, RedirectAttributes attr){
         float total = 0;
         float fscore = 0;
-        scoreService.addScore(userId, movieId, scoreNum);
+        String ip = (String) session.getAttribute("ip");
+        scoreService.addScore(userId, movieId, scoreNum,ip);
         List<Score> scores = scoreService.selectScoByMovieId(movieId);
         Integer scoreCount = scoreService.listScoByMovieIdCount(movieId);
         float count = scoreCount;

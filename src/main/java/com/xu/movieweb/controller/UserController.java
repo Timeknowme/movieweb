@@ -2,6 +2,7 @@ package com.xu.movieweb.controller;
 
 import com.xu.movieweb.model.User;
 import com.xu.movieweb.service.UserService;
+import com.xu.movieweb.util.getIp;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,10 +52,13 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/login"}, method = {RequestMethod.POST})
-    public String login(User check, HttpSession session){
+    public String login(User check, HttpSession session, HttpServletRequest request){
         User user = userService.userLogin(check.getUserName(),check.getUserPsd());
         if (user != null) {
             session.setAttribute("user",user);
+            String ip = getIp.getIpAddr(request);
+            session.setAttribute("ip",ip);
+            System.out.println(ip);
             return "redirect:/user/usermain.html";
         } else {
             session.setAttribute("userlogin","error");

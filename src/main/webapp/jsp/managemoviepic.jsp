@@ -12,7 +12,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
     <link rel="stylesheet" href="../css/bootstrap-table.css">
     <!-- start plugins -->
-    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
     <script src="../js/bootstrap-table.js"></script>
     <script src="../js/bootstrap-table-zh-CN.js"></script>
     <link href='http://fonts.useso.com/css?family=Roboto+Condensed:100,200,300,400,500,600,700,800,900' rel='stylesheet' type='text/css'>

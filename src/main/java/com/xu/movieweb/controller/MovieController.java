@@ -140,12 +140,14 @@ public class MovieController {
     @RequestMapping(value = {"/showMovie"}, method = {RequestMethod.GET})
     public ModelAndView showmovie(Integer movieId, HttpSession session){
         ModelAndView mav = new ModelAndView("single");
+        String ip = (String) session.getAttribute("ip");
 //        int total = 0;
 //        double finalscore = 0;
         User sessionUser = (User) session.getAttribute("user");
         if(sessionUser != null) {
             int userId = sessionUser.getUserId();
             Integer isCollect = collectService.isCollected(userId,movieId);
+            //判断用户是否收藏了
             if(isCollect > 0){
                 session.setAttribute("isCollect",1);
             } else {
@@ -157,6 +159,13 @@ public class MovieController {
                 session.setAttribute("isScore",1);
             } else {
                 session.removeAttribute("isScore");
+            }
+            //判断该ip是否评分
+            Integer isScoredByIp = scoreService.isScoredByIp(movieId,ip);
+            if(isScoredByIp > 0){
+                session.setAttribute("isScoredByIp",1);
+            } else {
+                session.removeAttribute("isScoredByIp");
             }
             Score score = scoreService.searchScore(userId, movieId);
             mav.addObject("score",score);

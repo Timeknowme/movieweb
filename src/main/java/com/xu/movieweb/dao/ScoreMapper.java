@@ -11,11 +11,14 @@ public interface ScoreMapper {
 
     List<Score> selectScoByMovieId(@Param("movieId") Integer movieId);
 
-    void addScore(@Param("userId") Integer userId, @Param("movieId") Integer movieId, @Param("scoreNum") Integer scoreNum);
+    void addScore(@Param("userId") Integer userId, @Param("movieId") Integer movieId,
+                  @Param("scoreNum") Integer scoreNum, @Param("ip") String ip);
 
     Integer listScoByMovieIdCount(@Param("movieId") Integer movieId);
 
     Integer isScored(@Param("userId") Integer userId, @Param("movieId") Integer movieId);
 
     Score searchScore(@Param("userId") Integer userId, @Param("movieId") Integer movieId);
+
+    Integer isScoredByIp(@Param("movieId") Integer movieId, @Param("ip") String ip);
 }
