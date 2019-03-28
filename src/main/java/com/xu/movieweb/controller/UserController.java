@@ -34,13 +34,14 @@ public class UserController {
     }
 
     @RequestMapping(value = { "/regist" }, method = { RequestMethod.POST })
-    public String addUser(User check) {
+    public String addUser(User check, HttpSession session) {
         System.out.println(check.getUserName());
         User user = userService.selectUserByName(check);
         if (user == null) {
             userService.addUser(check);
             return "redirect:/user/login.html";
         } else {
+            session.setAttribute("userregist","error");
             return "redirect:/user/regist.html";
         }
     }

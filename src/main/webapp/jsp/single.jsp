@@ -122,7 +122,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 </c:if>
                             </c:if>
                             <c:if test="${isScoredByIp != null}">
-                                该IP已经为该电影评过分。
+                                该IP或用户已经为该电影评过分。
                             </c:if>
                         </c:if>
                         <c:if test="${sessionScope.user == null}">

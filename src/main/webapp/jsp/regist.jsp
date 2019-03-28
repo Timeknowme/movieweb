@@ -98,6 +98,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="clearfix"> </div>
 					</div>
 				</form>
+				<%
+					Object s = session.getAttribute("userregist");
+					if(s != null && s.equals("error")){%>
+				<script type="text/javascript">
+					alert("注册失败");
+				</script>
+				<%
+						session.removeAttribute("userregist");}
+				%>
 				<div class="clearfix"> </div>
 			</div>
 		</div>
@@ -164,6 +173,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		}
 		if(psd1.value==psd2.value && un.value != '' && psd1.value != '' && psd2.value != ''){
 			document.getElementById('button').disabled=false;
+		}
+		if(psd1.value!=psd2.value && un.value != '' && psd1.value != '' && psd2.value != ''){
+			document.getElementById('button').disabled=true;
 		}
 	}
 </script>
